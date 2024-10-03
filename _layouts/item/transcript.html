@@ -41,6 +41,7 @@ endcapture -%}
 {% assign av = "soundcloud" %}
 {% assign soundcloud_id = page.object_location | split: '.com/' | last %}
 {%endif%}
+<div id="wrapper-for-the-wrapper">
 <div id="upper-content">
 {% if site.data.theme.media-scroll == true %}
 {% include transcript/style/media-scroll-wrapper.html %}
@@ -54,6 +55,7 @@ endcapture -%}
 {% if site.data.filters %}
 {% include transcript/item/transcript-viz.html %}
 {% endif %}
+</div>
 </div>
 
 {% include transcript/item/transcript.html %}

@@ -236,7 +236,15 @@
     };
   })();
 
-  
+  function measureandsetElement() {
+    
+    // Get the height of the element before making it fixed
+    const elementHeight = upperElement.offsetHeight;
+    
+    // Get the wrapper and set its height to the element's height
+    upperWrapper.style.height = `${elementHeight}px !important`; // Maintain the space in the flow
+
+}
 //filters tab javascript + scroll-to-top retraction of filters
 document.addEventListener('DOMContentLoaded', function() { 
       filterTab.addEventListener('click', function() {
