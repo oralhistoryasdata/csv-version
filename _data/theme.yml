@@ -87,8 +87,15 @@ search-child-objects: true # true / false - if true, child objects will appear o
 # 
 transcript-fields: "description,date,location,interviewer,image" # choose from the following fields --> description,date,location,interviewer,interviewee,bio,image 
 # list the fields you'd like displayed, separated by comma
-media-scroll: true ## true/false --> determines if the media and vizualization will appear to the lower right as a user scrolls down a transcript. This only appears on larger screens (min width 1024px).
+media-scroll: true ## true/false or blank --> determines if the media and visualization will appear to the lower right as a user scrolls down a transcript. This only appears on larger screens (min width 1024px).
+search-and-filters: true ## true/false --> determines if the search and filter options that appears above the text of an interview/transcript 
+search-and-filters-sticky: true ## true/false --> determines if the search and filter options are sticky to the top of the page as a user scrolls down a transcript
 
+##########
+# Visualization page / Oral History as Data Options 
+# 
+as-data: false ## true/false --> determines if the "As Data" button and modal that pops up if you click it will appear at the top right of the visualization page
+transcript-contents: false ## true/false --> determines if the contents of the individual interviews will appear and be filtered at the bottom of the visualization page (below the color coded portion)
 
 
 ##########
