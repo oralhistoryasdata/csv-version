@@ -34,3 +34,10 @@
 {%- endif -%}
 {% if site.noindex == true or page.noindex == true or layout.noindex == true %}<meta name="robots" content="noindex" />{% endif %}
 <!-- Last build date: {{ site.time | date: "%Y-%m-%d" }} -->
+{% if page.custom-head or layout.custom-head %}
+{%- assign page_heads = page.custom-head | split: ";" -%}
+{%- assign layout_heads = layout.custom-head | split: ";" -%}
+{%- assign heads = page_heads | concat: layout_heads -%}
+{% for h in heads %}{% if h contains "</"%}{{ h }}{% else %}{% include {{ h }} %}{% endif %}
+{% endfor %}
+{%- endif -%}
