@@ -238,20 +238,35 @@
   
   //filters tab javascript + scroll-to-top retraction of filters
   document.addEventListener('DOMContentLoaded', function () {
-    var upperHeight =  upperElement.offsetHeight;
-    step0.style.minHeight = upperHeight + "px";
-    {% unless site.data.theme.search-and-filters == false %}
-    filterTab.addEventListener('click', function () {
-      filtersSearch.classList.toggle('retracted');
-    });{% endunless %}
+      // check height of upper element containing av + metadata and viz
+      var upperHeight =  upperElement.offsetHeight;
+      // make the first sections minimum height equal to this height so that when the AV section moves down the page, the page height stays the same. 
+      step0.style.minHeight = upperHeight + "px";
+      
+      {% unless site.data.theme.search-and-filters == false %}
+        // add event listener so that when tab is clicked, filters element retracts up the page
+        filterTab.addEventListener('click', function () {
+        filtersSearch.classList.toggle('retracted');
+          });
+      {% endunless %}
+    // listener for the scroll to top button clickc
     document.getElementById('scroll-to-top').addEventListener('click', function () {
-      {% unless site.data.theme.search-and-filters == false %}if (filtersSearch.classList.contains("retracted")) { filtersSearch.classList.remove("retracted"); }{% endunless %}
+      {% unless site.data.theme.search-and-filters == false %}
+        // if scroll-to-top button clicked and filters are retracted, un retract them
+        if (filtersSearch.classList.contains("retracted")) { 
+            filtersSearch.classList.remove("retracted"); }
+      {% endunless %}
       {% if site.data.theme.media-scroll == true %}
-      if (upperElement.classList.contains("media-scroll-wrapper")) { setTimeout(function () { upperElement.classList.remove("media-scroll-wrapper"); }, 200); 
-      console.log('scrollstopped?'); } {% endif %}
-    });
-  });
+          // if the AV section is classed as moving down the page, remove it after 200 ms upon the scroll-to-top button being pushed
+        if (upperElement.classList.contains("media-scroll-wrapper")) { 
+            setTimeout(function () { upperElement.classList.remove("media-scroll-wrapper"); }, 200); 
+             } 
+      {% endif %}
+      });// end scroll to top listener
+    }); // end content loaded listener function
 
+
+    /*
   function throttle(mainFunction, delay) {
     let timerFlag = null; // Variable to keep track of the timer
 
@@ -308,5 +323,5 @@
   // Add an event listener to the window scroll event that calls the throttleScrollCheck function
   window.addEventListener("scroll", throttleScrollCheck);
   window.addEventListener('load', checkStickyAndUpdate);
-
+*/
 </script>
