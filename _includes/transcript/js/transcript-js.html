@@ -4,6 +4,7 @@
   const filtersSearch = document.getElementById('filters-search');
   const filterTab = document.getElementById('filter-tab');
   const upperElement = document.getElementById('upper-content');
+  const step0 = document.getElementById('step0');
 
   function vizFilter(x) {
     var rects = document.getElementsByTagName('rect');
@@ -234,16 +235,20 @@
     };
   })();
 
-
+  
   //filters tab javascript + scroll-to-top retraction of filters
   document.addEventListener('DOMContentLoaded', function () {
-    {% unless site.data.theme.search-and-filters == false %}filterTab.addEventListener('click', function () {
+    var upperHeight =  upperElement.offsetHeight;
+    step0.style.minHeight = upperHeight + "px";
+    {% unless site.data.theme.search-and-filters == false %}
+    filterTab.addEventListener('click', function () {
       filtersSearch.classList.toggle('retracted');
     });{% endunless %}
     document.getElementById('scroll-to-top').addEventListener('click', function () {
       {% unless site.data.theme.search-and-filters == false %}if (filtersSearch.classList.contains("retracted")) { filtersSearch.classList.remove("retracted"); }{% endunless %}
       {% if site.data.theme.media-scroll == true %}
-      if (upperElement.classList.contains("media-scroll-wrapper")) { setTimeout(function () { upperElement.classList.remove("media-scroll-wrapper"); }, 300); console.log('scrollstopped?'); } {% endif %}
+      if (upperElement.classList.contains("media-scroll-wrapper")) { setTimeout(function () { upperElement.classList.remove("media-scroll-wrapper"); }, 200); 
+      console.log('scrollstopped?'); } {% endif %}
     });
   });
 
