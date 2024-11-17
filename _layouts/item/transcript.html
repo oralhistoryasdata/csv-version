@@ -44,7 +44,8 @@ endcapture -%}
 {%endif%}
 <div id="scrolly">
   <article>
-    <div class="step my-3 pb-5" id="step0" >
+    <div class="step my-3 {% unless site.data.theme.media-scroll == false %}
+    pb-5{% endunless %}" id="step0" >
       <div id="upper-content">
         {% if site.data.theme.media-scroll == true %}
         {% include transcript/style/media-scroll-wrapper.html %}

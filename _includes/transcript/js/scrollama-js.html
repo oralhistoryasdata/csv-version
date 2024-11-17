@@ -15,17 +15,21 @@
             {% if site.data.theme.media-scroll == true %}
                 if (upperElement.classList.contains("media-scroll-wrapper")) {
                     upperElement.classList.remove("media-scroll-wrapper");
-                    if (filtersSearch.classList.contains("retracted")) {
-                        filtersSearch.classList.remove("retracted");
+                    } 
+            {% endif %}
+            {% unless site.data.theme.search-and-filters == false %}
+                 if (filtersSearch.classList.contains("retracted")) {
+                    filtersSearch.classList.remove("retracted");
                     };
-            } {% endif %}
+            {% endunless %}
         }
         else if (stepIndex == 1) {
                 filterTab.classList.remove('d-none');
                 {% if site.data.theme.media-scroll == true %}
                     if (!upperElement.classList.contains("media-scroll-wrapper")) {
-                    upperElement.classList.add("media-scroll-wrapper");
-                    } {% endif %}
+                        upperElement.classList.add("media-scroll-wrapper");
+                         } 
+                {% endif %}
                 }
     }
     function handleStepExit(response) {

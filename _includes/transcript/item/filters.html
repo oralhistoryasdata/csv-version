@@ -1,8 +1,9 @@
 <!-- cb: _includes/transcript/item/filters.html -->
 {% if site.data.theme.search-and-filters == false %}
+<div style="height:1px; width:1px;opacity:0;">
 <div class="row my-3 sticky-top bg-white border-bottom border-left border-right d-print-none py-3 w-md-75" id="filters-search" style="height:1px; width:1px;opacity:0;">
   <div id="filter-tab" class="d-none filter-tab col-4 col-lg-2 text-center justify-content-end bg-primary text-white small px-1 py-1" style="height:1px; width:1px;opacity:0;"></div>
-</div>
+</div></div>
 {% else %}
 <div class="row my-3 {% unless site.data.theme.search-and-filters-sticky == false %}sticky-top {% endunless %}bg-white border-bottom border-left border-right d-print-none py-3 w-md-75" id="filters-search">
   <div class="col {% unless site.data.filters %}d-none{% endunless %}">
@@ -31,8 +32,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <button class="reset btn btn-sm btn-primary input-group-text float-end float-md-none mt-2 mt-md-0" onclick="{% if site.data.filters %}vizFilter('all');{% else %}resetVals();{% endif %}">Reset
-            Filters</button>
+          <button class="reset btn btn-sm btn-primary input-group-text float-end float-md-none mt-2 mt-md-0" onclick="{% if site.data.filters %}vizFilter('all');{% else %}resetVals();{% endif %}">Reset Filters</button>
         </div>
       </div>
     </div>
