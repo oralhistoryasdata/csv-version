@@ -1,0 +1,54 @@
+<script>
+    var scrolly = document.querySelector("#scrolly");
+        var article = scrolly.querySelector("article");
+        var step = article.querySelectorAll(".step");
+            // initialize the scrollama
+            var scroller = scrollama();
+    
+        // scrollama event handlers
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        var stepIndex = response.index;
+        // Apply specific styles for two sections on page, steps 0 and 1 
+        if (stepIndex == 0) {
+            filterTab.classList.add('d-none');
+            {% if site.data.theme.media-scroll == true %}
+                if (upperElement.classList.contains("media-scroll-wrapper")) {
+                    upperElement.classList.remove("media-scroll-wrapper");
+                    if (filtersSearch.classList.contains("retracted")) {
+                        filtersSearch.classList.remove("retracted");
+                    };
+            } {% endif %}
+        }
+        else if (stepIndex == 1) {
+                filterTab.classList.remove('d-none');
+                {% if site.data.theme.media-scroll == true %}
+                    if (!upperElement.classList.contains("media-scroll-wrapper")) {
+                    upperElement.classList.add("media-scroll-wrapper");
+                    } {% endif %}
+                }
+    }
+    function handleStepExit(response) {
+        
+    }
+    
+    // Initialize scrollama and set up event listeners
+    function init() {
+        step.forEach(function(step) {
+            
+        });
+    
+        scroller
+            .setup({
+                step: "#scrolly article .step",
+                debug: false,
+                offset: 0.24
+            })
+            .onStepEnter(handleStepEnter)
+            .onStepExit(handleStepExit);
+    }
+    
+    // Kick things off
+    init();
+    
+</script>
