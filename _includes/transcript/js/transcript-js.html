@@ -250,8 +250,12 @@
   document.addEventListener('DOMContentLoaded', function () {
       // check height of upper element containing av + metadata and viz
       var upperHeight =  upperElement.offsetHeight;
-      // make the first sections minimum height equal to this height so that when the AV section moves down the page, the page height stays the same. 
-      step0.style.minHeight = upperHeight + "px";
+      // make the first sections minimum height equal to this height so that when the AV section moves down the page, the page height stays the same. First checks to see if the heigh is less than 300px and makes min-height 350px in that instance, which happens on mobile when going down to specific line. 
+          if (upperHeight < 300) {
+          step0.style.minHeight = "350px";
+        } else {
+          step0.style.minHeight = upperHeight + "px";
+        }
       
       {% unless site.data.theme.search-and-filters == false %}
         // add event listener so that when tab is clicked, filters element retracts up the page
