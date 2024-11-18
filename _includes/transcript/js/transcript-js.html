@@ -78,7 +78,7 @@
       document.getElementById("numberof").innerHTML = numberofint + " lines match your query --><i> " + x + "</i>";
       document.getElementById("searchResults").innerHTML = searchResults;
       document.getElementById("linecount").classList.remove("d-none");
-      document.getElementById("filtersearch").classList.remove("d-none");
+      document.getElementById("filtersearch-dropdown").classList.remove("d-none");
       if (filtersSearch.classList.contains("retracted")) { setTimeout(function () { filtersSearch.classList.add("retracted"); }, 300); }
     }
   }
@@ -126,7 +126,7 @@
     document.getElementById("quicksearch").value = "";
     document.getElementById("searchResults").innerHTML = searchResults;
     document.getElementById("linecount").classList.remove("d-none");
-    document.getElementById("filtersearch").classList.remove("d-none");
+    document.getElementById("filtersearch-dropdown").classList.remove("d-none");
     countforFilter(filterClass);
     if (filtersSearch.classList.contains("retracted")) 
     { setTimeout(function () { filtersSearch.classList.add("retracted"); }, 300); }
@@ -179,7 +179,7 @@
     window.history.replaceState({}, '', location.pathname);
     {% unless site.data.theme.search-and-filters == false %}
     document.getElementById("linecount").classList.add("d-none");
-    document.getElementById("filtersearch").classList.add("d-none");
+    document.getElementById("filtersearch-dropdown").classList.add("d-none");
     document.getElementById("quicksearch").value = "";
     document.getElementById("filters").selectedIndex = 0;
     {% endunless %}
