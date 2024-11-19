@@ -446,7 +446,8 @@
             {% endunless %}
         }
         else if (stepIndex == 1) {
-                filterTab.classList.remove('d-none');
+			{% unless site.data.theme.search-and-filters == false or site.data.theme.search-and-filters-sticky == false %}
+                filterTab.classList.remove('d-none'); {% endunless %}
                 {% if site.data.theme.media-scroll == true %}
                     if (!upperElement.classList.contains("media-scroll-wrapper")) {
                         upperElement.classList.add("media-scroll-wrapper");
