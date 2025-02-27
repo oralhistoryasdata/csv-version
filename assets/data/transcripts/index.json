@@ -1,0 +1,30 @@
+[
+  {
+    "id": "armantrout",
+    "title": "Interview with Rae Armantrout",
+    "interviewee": "Rae Armantrout",
+    "date": "2014-03-27",
+    "url": "/assets/data/transcripts/armantrout.json"
+  },
+  {
+    "id": "gluck",
+    "title": "Interview with Louise Glück",
+    "interviewee": "Louise Glück",
+    "date": "2014-05-14",
+    "url": "/assets/data/transcripts/gluck.json"
+  },
+  {
+    "id": "mohammad",
+    "title": "Interview with K. Silem Mohammad",
+    "interviewee": "K. Silem Mohammad",
+    "date": "2014-06-16",
+    "url": "/assets/data/transcripts/mohammad.json"
+  },
+  {
+    "id": "wrigley",
+    "title": "Interview with Robert Wrigley",
+    "interviewee": "Robert Wrigley",
+    "date": "2014-06-16",
+    "url": "/assets/data/transcripts/wrigley.json"
+  }
+]
