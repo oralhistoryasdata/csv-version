@@ -109,7 +109,6 @@ function codeFilter(filterClass) {
     const parentSection = rect.closest('section.vizdiv');
     if (parentSection) {
       parentSection.classList.remove("hidden");
-      parentSection.setAttribute('aria-hidden', 'false');
     }
   });
 
@@ -138,18 +137,18 @@ function codeFilter(filterClass) {
     if (firstVisibleRow) {
       const firstLink = firstVisibleRow.querySelector('a');
       if (firstLink) {
-        firstLink.focus();
+        firstLink.focus({ preventScroll: true });
       } else {
         // If no link, focus the row itself
         firstVisibleRow.setAttribute('tabindex', '0');
-        firstVisibleRow.focus();
+        firstVisibleRow.focus({ preventScroll: true });
       }
     } else {
       // If no results, focus the content area to announce no results
       const contentArea = getElement('transcript-contents');
       if (contentArea) {
         contentArea.setAttribute('tabindex', '-1');
-        contentArea.focus();
+        contentArea.focus({ preventScroll: true });
       }
     }
   }, 100);
