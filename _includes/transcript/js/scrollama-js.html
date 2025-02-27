@@ -1,8 +1,93 @@
 <script src="/assets/lib/scrollama.js"></script>
 
-<script type="module">
-  import { initScrollama } from '/assets/js/scrollama-init.js';
+<script>
+// Initialize scrollama for transcript pages
+document.addEventListener('DOMContentLoaded', function() {
+  const scrolly = document.getElementById('scrolly');
+  if (!scrolly) return;
   
-  // Initialize scrollama
-  document.addEventListener('DOMContentLoaded', initScrollama);
+  const article = scrolly.querySelector('article');
+  if (!article) return;
+  
+  const steps = article.querySelectorAll('.step');
+  if (!steps.length) return;
+  
+  // Cache frequently used elements
+  const filterTab = document.getElementById('filter-tab');
+  const upperElement = document.getElementById('upper-content');
+  const filtersSearch = document.getElementById('filters-search');
+  
+  // Initialize the scrollama instance
+  const scroller = scrollama();
+  
+  /**
+   * Handle step enter events
+   */
+  function handleStepEnter(response) {
+    const stepIndex = response.index;
+    
+    // Handle step 0 (top of page)
+    if (stepIndex === 0) {
+      if (filterTab) {
+        filterTab.classList.add('d-none');
+      }
+      
+      // Remove media-scroll-wrapper if enabled and present
+      if (upperElement && 
+          window.site && 
+          window.site.data && 
+          window.site.data.theme && 
+          window.site.data.theme.mediaScroll) {
+        upperElement.classList.remove('media-scroll-wrapper');
+      }
+      
+      // Remove retracted class from filters if present
+      if (filtersSearch && 
+          window.site && 
+          window.site.data && 
+          window.site.data.theme && 
+          window.site.data.theme.searchAndFilters !== false) {
+        filtersSearch.classList.remove('retracted');
+      }
+    } 
+    // Handle step 1 (scrolled down)
+    else if (stepIndex === 1) {
+      // Show filter tab if search and filters are enabled
+      if (filterTab && 
+          window.site && 
+          window.site.data && 
+          window.site.data.theme && 
+          window.site.data.theme.searchAndFilters !== false &&
+          window.site.data.theme.searchAndFiltersSticky !== false) {
+        filterTab.classList.remove('d-none');
+      }
+      
+      // Add media-scroll-wrapper if enabled
+      if (upperElement && 
+          window.site && 
+          window.site.data && 
+          window.site.data.theme && 
+          window.site.data.theme.mediaScroll) {
+        upperElement.classList.add('media-scroll-wrapper');
+      }
+    }
+  }
+  
+  /**
+   * Handle step exit events
+   */
+  function handleStepExit(response) {
+    // Currently not used but kept for future functionality
+  }
+  
+  // Set up scrollama
+  scroller
+    .setup({
+      step: '#scrolly article .step',
+      debug: false,
+      offset: 0.24
+    })
+    .onStepEnter(handleStepEnter)
+    .onStepExit(handleStepExit);
+});
 </script>
