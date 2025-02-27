@@ -1,3 +1,11 @@
+@use "sass:color";
+
+/* Bootstrap default theme variables */
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-size-base: 1rem !default;
+$body-color: #212529 !default;
+$primary: #0d6efd !default;
+
 /* 
     This is a modified version of Bootstrap Sass for customizing theme colors.
     It is intended to create an easy means to override basic theme colors for btn-, btn-outline-, text-, and bg- classes. 
@@ -5,10 +13,11 @@
 */
 
 /* variables needed from Bootstrap */ 
-
+$theme-colors: () !default;  
 $white:    #fff !default;
 $black:    #000 !default;
 $primary:       #0d6efd !default;
+$link-color: $primary !default;  
 
 $min-contrast-ratio:   4.5 !default;
 $color-contrast-dark:      $black !default;

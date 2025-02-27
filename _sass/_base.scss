@@ -1,20 +1,22 @@
+@use "sass:map";
+
 /*  
     base - slight modifications to override base Bootstrap
     these values are configurable using theme.yml > Theme Fonts area 
     or by editing base variables in cb.scss
 */
 body {
-    @if $base-font-family != "" { font-family: $base-font-family; }
-    @if $base-font-size != "" { font-size: $base-font-size; }
-    @if $text-color != "" { color: $text-color; }
+    @if var(--base-font-family) != "" { font-family: var(--base-font-family); }
+    @if var(--base-font-size) != "" { font-size: var(--base-font-size); }
+    @if var(--text-color) != "" { color: var(--text-color); }
 }
 a {
     /* remove link underline */ 
     text-decoration: none;
-    @if $link-color != "" { 
-        color: $link-color; 
+    @if var(--link-color) != "" { 
+        color: var(--link-color); 
         &:hover {
-            @if $text-color != "" { color: $text-color; }
+            @if var(--text-color) != "" { color: var(--text-color); }
         }
     }
 }
