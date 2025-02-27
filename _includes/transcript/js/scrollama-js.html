@@ -28,48 +28,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle step 0 (top of page)
     if (stepIndex === 0) {
-      if (filterTab) {
-        filterTab.classList.add('d-none');
-      }
+      filterTab.classList.add('d-none');
       
-      // Remove media-scroll-wrapper if enabled and present
-      if (upperElement && 
-          window.site && 
-          window.site.data && 
-          window.site.data.theme && 
-          window.site.data.theme.mediaScroll) {
-        upperElement.classList.remove('media-scroll-wrapper');
+      {% if site.data.theme.media-scroll == true %}
+      if (upperElement.classList.contains("media-scroll-wrapper")) {
+        upperElement.classList.remove("media-scroll-wrapper");
       }
+      {% endif %}
       
-      // Remove retracted class from filters if present
-      if (filtersSearch && 
-          window.site && 
-          window.site.data && 
-          window.site.data.theme && 
-          window.site.data.theme.searchAndFilters !== false) {
-        filtersSearch.classList.remove('retracted');
+      {% unless site.data.theme.search-and-filters == false %}
+      if (filtersSearch.classList.contains("retracted")) {
+        filtersSearch.classList.remove("retracted");
       }
+      {% endunless %}
     } 
     // Handle step 1 (scrolled down)
     else if (stepIndex === 1) {
-      // Show filter tab if search and filters are enabled
-      if (filterTab && 
-          window.site && 
-          window.site.data && 
-          window.site.data.theme && 
-          window.site.data.theme.searchAndFilters !== false &&
-          window.site.data.theme.searchAndFiltersSticky !== false) {
-        filterTab.classList.remove('d-none');
-      }
+      {% unless site.data.theme.search-and-filters == false or site.data.theme.search-and-filters-sticky == false %}
+      filterTab.classList.remove('d-none');
+      {% endunless %}
       
-      // Add media-scroll-wrapper if enabled
-      if (upperElement && 
-          window.site && 
-          window.site.data && 
-          window.site.data.theme && 
-          window.site.data.theme.mediaScroll) {
-        upperElement.classList.add('media-scroll-wrapper');
+      {% if site.data.theme.media-scroll == true %}
+      if (!upperElement.classList.contains("media-scroll-wrapper")) {
+        upperElement.classList.add("media-scroll-wrapper");
       }
+      {% endif %}
     }
   }
   
