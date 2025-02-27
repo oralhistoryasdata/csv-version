@@ -68,8 +68,23 @@
     }
 }
 
+.timestamp-link{
+    color: #436a71 !important;
+    text-decoration: none !important;
+}
 
-
+.skip-link {
+    position: absolute;
+    background: white;
+    z-index: 1000;
+    border: 1px solid #333;
+    text-decoration: underline;
+  }
+  .skip-link:focus {
+    clip: auto;
+    height: auto;
+    width: auto;
+  }
 
 @media print {
 

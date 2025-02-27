@@ -5,52 +5,68 @@ let urlCodeFilter = url.searchParams.get('filter');
 let urlPeepFilter = url.searchParams.get('id');
 
 function codeFilter(x) {
+    // Reset all rectangles and set them to black
     document.querySelectorAll("rect").forEach(rect => {
       rect.classList.remove(...Array.from(rect.classList).filter(c => c.startsWith("primary-")));
       rect.classList.add("black");
     });
-    document.querySelectorAll('a[tabindex=""]').forEach(a => {
-        if (a.querySelector('rect')) {
-            a.setAttribute('tabindex', -1);
-        }
-    });
+
+
+    // Reset aria-pressed state for SVGs
     document.querySelectorAll('svg[aria-pressed="true"]').forEach(svg => {
         svg.setAttribute('aria-pressed', 'false');
     });
+
+    // Reset all circles to black
     document.querySelectorAll("circle").forEach(circle => {
         circle.classList.add("black");
     });
+
+    // Hide all table rows initially
     document.querySelectorAll("tr").forEach(tr => {
         tr.querySelector('a[tabindex="0"]')?.setAttribute('tabindex', -1);
         tr.classList.add("hidden");
         tr.removeAttribute("aria-hidden");
     });
+
+    // Hide all sections initially
     document.querySelectorAll("section.contentsdiv, section.vizdiv").forEach(section => {
         section.classList.add("hidden");
         section.removeAttribute("aria-hidden");
     });
+
+    // Show rectangles for the selected filter
     document.querySelectorAll('rect.' + x).forEach(rect => {
         rect.classList.toggle("black");
         rect.classList.add("primary-" + x);
-        rect.closest('a')?.setAttribute('tabindex', 0);
     });
+
+    // Show circles for the selected filter
     document.querySelectorAll('circle.' + x).forEach(circle => {
         circle.classList.toggle("black");
         circle.closest('svg')?.setAttribute('aria-pressed', 'true');
     });
+
+    // Show table rows for the selected filter
     document.querySelectorAll('tr.' + x).forEach(tr => {
         tr.classList.toggle("hidden");
         tr.setAttribute('aria-hidden', 'false');
     });
+
+    // Make sections visible for the filtered content
     document.querySelectorAll("tr:not(.hidden)").forEach(tr => {
         tr.closest('section.contentsdiv')?.classList.remove("hidden");
         tr.closest('section.contentsdiv')?.setAttribute('aria-hidden', 'false');
         tr.querySelector('a[tabindex="-1"]')?.setAttribute('tabindex', 0);
     });
+
+    // Show visualization section for the filtered content
     document.querySelectorAll("rect:not(.black)").forEach(rect => {
         rect.closest('section.vizdiv')?.classList.remove("hidden");
         rect.closest('section.vizdiv')?.setAttribute('aria-hidden', 'false');
     });
+
+    // Update URL parameters
     params.set('filter', x);
     var p = params.toString();
     if (!urlPeepFilter){
@@ -58,6 +74,37 @@ function codeFilter(x) {
     }
     window.history.replaceState({}, '', location.pathname + '?' + p);
 
+    // Update status for screen readers
+    const filterName = document.querySelector(`svg[data-id="${x}"] text`)?.textContent || x;
+    const matchCount = document.querySelectorAll('tr.' + x).length;
+    const statusMessage = `Content filtered by ${filterName}. ${matchCount} matching segments found.`;
+
+    const statusElement = document.getElementById('filter-status');
+    if (statusElement) {
+        statusElement.textContent = statusMessage;
+    }
+
+    // Move focus to first result for keyboard users
+    setTimeout(() => {
+        const firstVisibleRow = document.querySelector('tr:not(.hidden)');
+        if (firstVisibleRow) {
+            const firstLink = firstVisibleRow.querySelector('a');
+            if (firstLink) {
+                firstLink.focus();
+            } else {
+                // If no link, focus the row itself
+                firstVisibleRow.setAttribute('tabindex', '0');
+                firstVisibleRow.focus();
+            }
+        } else {
+            // If no results, focus the content area to announce no results
+            const contentArea = document.getElementById('transcript-contents');
+            if (contentArea) {
+                contentArea.setAttribute('tabindex', '-1');
+                contentArea.focus();
+            }
+        }
+    }, 100);
 }
 /*
 function vizFilter(x) {
@@ -110,13 +157,45 @@ document.querySelectorAll("h3.toggle_int").forEach(h3 => {
 });
 
 document.getElementById("reset").addEventListener('click', function() {
+    // Reset all visual elements
     document.querySelectorAll("rect, circle, tr, table, svg, h3, div, section").forEach(el => {
         el.classList.remove("black", "hidden", "dark");
         el.removeAttribute("aria-hidden");
     });
-    params.set('id', '');
-    params.set('filter', '');
+
+    // Reset all tabindex values
+    document.querySelectorAll('a[tabindex="0"]').forEach(a => {
+        if (a.querySelector('rect')) {
+            a.setAttribute('tabindex', -1);
+        }
+    });
+
+    // Reset all svg buttons
+    document.querySelectorAll('svg[aria-pressed="true"]').forEach(svg => {
+        svg.setAttribute('aria-pressed', 'false');
+    });
+
+    // Clear URL parameters
+    params.delete('id');
+    params.delete('filter');
     window.history.replaceState({}, '', location.pathname);
+
+    // Update status for screen readers
+    const statusElement = document.getElementById('filter-status');
+    if (statusElement) {
+        statusElement.textContent = "All filters have been reset. Showing all content.";
+    }
+
+    // Return focus to the reset button or another appropriate element
+    document.getElementById('transcript-contents').setAttribute('tabindex', '-1');
+    document.getElementById('reset').focus();
+
+    // Announce the reset action
+    setTimeout(() => {
+        if (statusElement) {
+            statusElement.textContent = "View reset. All transcript segments are now visible.";
+        }
+    }, 1000);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -143,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
- if(urlCodeFilter && urlPeepFilter) { 
+ if(urlCodeFilter && urlPeepFilter) {
      // code to be executed if a filter is contained in the url
      codeFilter(urlCodeFilter);
      interviewFilter(urlPeepFilter);
@@ -155,5 +234,5 @@ document.addEventListener('DOMContentLoaded', function() {
     interviewFilter(urlPeepFilter);
  };
 })();
-  
+
 </script>
