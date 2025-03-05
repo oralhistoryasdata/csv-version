@@ -1,22 +1,35 @@
-@use "sass:map";
-
 /*  
     base - slight modifications to override base Bootstrap
     these values are configurable using theme.yml > Theme Fonts area 
     or by editing base variables in cb.scss
 */
+
+/* set up base variable to override from cb.scss */
+$base-font-family: "" !default;
+$base-font-size: "" !default;
+$text-color: "" !default;
+$link-color: "" !default;
+
+/* smooth scroll for back to top, unless user opt out */
+html {
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+}
+
+/* set font base set in theme.yml */
 body {
-    @if var(--base-font-family) != "" { font-family: var(--base-font-family); }
-    @if var(--base-font-size) != "" { font-size: var(--base-font-size); }
-    @if var(--text-color) != "" { color: var(--text-color); }
+    @if $base-font-family != "" { font-family: $base-font-family; }
+    @if $base-font-size != "" { font-size: $base-font-size; }
+    @if $text-color != "" { color: $text-color; }
 }
 a {
     /* remove link underline */ 
     text-decoration: none;
-    @if var(--link-color) != "" { 
-        color: var(--link-color); 
+    @if $link-color != "" { 
+        color: $link-color; 
         &:hover {
-            @if var(--text-color) != "" { color: var(--text-color); }
+            @if $text-color != "" { color: $text-color; }
         }
     }
 }
