@@ -20,6 +20,7 @@ The JavaScript codebase for transcript and visualization functionality was moder
    - Reduced DOM manipulation in loops
    - Added helper functions for common operations
    - Improved error handling with null checks
+   - Implemented lazy loading for transcript JSON data (March 2025)
 
 4. **Accessibility Enhancements**:
    - Added proper ARIA attributes to interactive elements
@@ -29,6 +30,25 @@ The JavaScript codebase for transcript and visualization functionality was moder
 ### Implementation Notes
 
 The initial attempt to use ES modules had to be rolled back due to compatibility issues with the Jekyll site architecture. Instead, a more traditional approach was used while still keeping the modern JavaScript syntax and organizational improvements.
+
+### Lazy Loading Implementation (March 2025)
+
+To improve performance on the visualization page, transcript JSON data is now loaded on-demand:
+
+1. **Deferred Loading Strategy**:
+   - JSON data is only loaded when a user clicks on a colored filter button
+   - Initial page loads faster with minimal resources
+   - Added loading indicator during data retrieval
+
+2. **Caching Mechanism**:
+   - After first load, data is cached in memory
+   - Subsequent filter operations use the cached data
+   - No reload needed when switching between filters
+
+3. **URL Parameter Support**:
+   - URLs with filter parameters still work properly
+   - Data loads automatically when URL contains parameters
+   - Maintains bookmarkability and link sharing
 
 ### Remaining Accessibility Improvements
 
