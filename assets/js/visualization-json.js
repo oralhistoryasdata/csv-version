@@ -27,6 +27,7 @@ const getElement = (id, fallback = null) => {
 // Transcript data cache
 let transcriptCache = {};
 let transcriptIndex = null;
+let dataLoaded = false;
 
 // Get base URL for assets
 const baseUrl = document.querySelector('base') ? document.querySelector('base').href : '';
@@ -69,9 +70,24 @@ async function loadAllTranscripts() {
     return;
   }
   
+  // Show loading indicator
+  const contentContainer = document.getElementById('transcript-content-container');
+  if (contentContainer) {
+    contentContainer.innerHTML = `
+      <div class="loading">
+        <p>Loading transcript data...</p>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    `;
+  }
+  
   for (const transcriptId of window.availableTranscripts) {
     await loadTranscript(transcriptId);
   }
+  
+  dataLoaded = true;
 }
 
 /**
@@ -373,23 +389,62 @@ function resetFilters() {
 }
 
 /**
+ * Load data on demand and apply filter
+ */
+async function loadDataAndFilter(filterClass) {
+  if (!dataLoaded) {
+    // First time a filter is clicked, load all the data
+    try {
+      await loadAllTranscripts();
+      await updateTooltipsFromJson();
+      await populateTranscriptContent();
+      console.log('Transcript data loaded successfully');
+    } catch (error) {
+      console.error('Error loading transcript data:', error);
+      const contentContainer = document.getElementById('transcript-content-container');
+      if (contentContainer) {
+        contentContainer.innerHTML = '<div class="alert alert-danger">Error loading transcript data. Please try refreshing the page.</div>';
+      }
+      return;
+    }
+  }
+  
+  // Now apply the filter
+  codeFilter(filterClass);
+}
+
+/**
  * Initialize the page
  */
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
   console.log('Initializing transcript visualization...');
   
-  // Set up legend click handlers
+  // Set up legend click handlers that load data on first click
   document.querySelectorAll(".legend").forEach(legend => {
     legend.addEventListener('click', function() {
       const cFilter = this.getAttribute("data-id");
-      codeFilter(cFilter);
+      loadDataAndFilter(cFilter);
     });
   });
 
   // Set up interview filter handlers
   document.querySelectorAll("h3.toggle_int").forEach(h3 => {
-    h3.addEventListener('click', function() {
+    h3.addEventListener('click', async function() {
       const intFilter = this.getAttribute("data-id");
+      
+      // If data isn't loaded yet, load it first
+      if (!dataLoaded) {
+        try {
+          await loadAllTranscripts();
+          await updateTooltipsFromJson();
+          await populateTranscriptContent();
+          console.log('Transcript data loaded successfully');
+        } catch (error) {
+          console.error('Error loading transcript data:', error);
+          return;
+        }
+      }
+      
       interviewFilter(intFilter);
     });
   });
@@ -397,7 +452,22 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Set up reset button handler
   const resetButton = getElement("reset");
   if (resetButton) {
-    resetButton.addEventListener('click', resetFilters);
+    resetButton.addEventListener('click', async function() {
+      // If data isn't loaded yet, load it first
+      if (!dataLoaded) {
+        try {
+          await loadAllTranscripts();
+          await updateTooltipsFromJson();
+          await populateTranscriptContent();
+          console.log('Transcript data loaded successfully');
+        } catch (error) {
+          console.error('Error loading transcript data:', error);
+          return;
+        }
+      }
+      
+      resetFilters();
+    });
   }
 
   // Handle keyboard interactions for SVG buttons
@@ -418,31 +488,32 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
   
-  try {
-    // Load and update tooltips
-    await updateTooltipsFromJson();
-    
-    // Load and populate transcript content
-    if (document.getElementById('transcript-content-container')) {
-      await populateTranscriptContent();
-    }
-    
-    console.log('Transcript data loaded successfully');
-    
-    // Apply any URL filters after content is loaded
-    if (urlCodeFilter && urlPeepFilter) {
-      codeFilter(urlCodeFilter);
-      interviewFilter(urlPeepFilter);
-    } else if (urlCodeFilter) {
-      codeFilter(urlCodeFilter);
-    } else if (urlPeepFilter) {
-      interviewFilter(urlPeepFilter);
-    }
-  } catch (error) {
-    console.error('Error initializing transcript visualization:', error);
-    const contentContainer = document.getElementById('transcript-content-container');
-    if (contentContainer) {
-      contentContainer.innerHTML = '<div class="alert alert-danger">Error loading transcript data. Please try refreshing the page.</div>';
-    }
+  // Handle URL parameters - if they exist, we need to load data right away
+  if (urlCodeFilter || urlPeepFilter) {
+    (async function() {
+      try {
+        await loadAllTranscripts();
+        await updateTooltipsFromJson();
+        await populateTranscriptContent();
+        
+        console.log('Transcript data loaded successfully for URL parameters');
+        
+        // Apply URL filters after content is loaded
+        if (urlCodeFilter && urlPeepFilter) {
+          codeFilter(urlCodeFilter);
+          interviewFilter(urlPeepFilter);
+        } else if (urlCodeFilter) {
+          codeFilter(urlCodeFilter);
+        } else if (urlPeepFilter) {
+          interviewFilter(urlPeepFilter);
+        }
+      } catch (error) {
+        console.error('Error initializing transcript visualization:', error);
+        const contentContainer = document.getElementById('transcript-content-container');
+        if (contentContainer) {
+          contentContainer.innerHTML = '<div class="alert alert-danger">Error loading transcript data. Please try refreshing the page.</div>';
+        }
+      }
+    })();
   }
 });
