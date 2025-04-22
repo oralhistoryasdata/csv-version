@@ -99,7 +99,7 @@ module Jekyll
       end
       
       # Store collection file in a hidden directory that Jekyll won't watch
-      src_path = File.join(site.source, '.data')  # Changed to .data directory
+      src_path = File.join(site.source, 'assets/data/transcripts')  # Changed to .data directory
       data_path = File.join(src_path, 'transcript-collection.json')
       
       # Add timestamp check
