@@ -32,7 +32,10 @@ module Jekyll
       }
       
       # For each transcript, create a JSON file and add to comprehensive collection
+      puts "Found #{transcripts.keys.length} transcripts to process." # Added log
       transcripts.each do |transcript_name, transcript_data|
+        puts "Processing transcript: #{transcript_name}" # Added log
+        
         # Find metadata for this transcript
         metadata = metadata_collection.find { |item| item['objectid'] == transcript_name } || {}
         
@@ -73,10 +76,21 @@ module Jekyll
         # Add to the comprehensive collection
         collection_data[:transcripts][transcript_name] = json_data
         
-        # Write individual JSON file to destination directory
-        path = File.join(site.dest, 'assets', 'data', 'transcripts', "#{transcript_name}.json")
-        File.open(path, 'w') do |file|
-          file.write(JSON.pretty_generate(json_data))
+        # Define the target directory within the source folder
+        target_dir = File.join(site.source, 'assets', 'data', 'transcripts')
+        # Ensure the target directory exists
+        FileUtils.mkdir_p(target_dir)
+        
+        # Write individual JSON file to the source directory
+        path = File.join(target_dir, "#{transcript_name}.json") # Changed site.dest to target_dir
+        puts "Attempting to write individual file to source: #{path}" # Updated log message
+        begin
+          File.open(path, 'w') do |file|
+            file.write(JSON.pretty_generate(json_data))
+          end
+          puts "Successfully wrote to source: #{path}" # Updated log message
+        rescue => e
+          puts "Error writing file to source #{path}: #{e.message}" # Updated log message
         end
       end
       
@@ -88,19 +102,24 @@ module Jekyll
           'title' => metadata['title'] || transcript_name,
           'interviewee' => metadata['interviewee'] || metadata['title'] || transcript_name,
           'date' => metadata['date'],
-          'url' => "/assets/data/transcripts/#{transcript_name}.json"
+          # Update the URL to reflect that the files will be copied by Jekyll
+          'url' => "/assets/data/transcripts/#{transcript_name}.json" 
         }
       end
       
-      # Write index JSON file
+      # Write index JSON file to the destination directory (this one should go to _site)
       index_path = File.join(site.dest, 'assets', 'data', 'transcripts', 'index.json')
+      # Ensure the destination directory for the index exists
+      FileUtils.mkdir_p(File.dirname(index_path)) 
       File.open(index_path, 'w') do |file|
         file.write(JSON.pretty_generate(index_data))
       end
+      puts "Successfully wrote index file to destination: #{index_path}" # Added log for index
       
-      # Store collection file in a hidden directory that Jekyll won't watch
-      src_path = File.join(site.source, 'assets/data/transcripts')  # Changed to .data directory
-      data_path = File.join(src_path, 'transcript-collection.json')
+      # Store collection file in the source directory's _data folder
+      # Note: Changed the path logic slightly here from previous attempts for clarity
+      data_dir = File.join(site.source, '_data') # Target the _data directory
+      data_path = File.join(data_dir, 'transcript-collection.json') # Path within _data
       
       # Add timestamp check
       should_write = true
@@ -119,13 +138,13 @@ module Jekyll
       
       # Only write if content is different, to avoid regeneration loops
       if should_write
-        FileUtils.mkdir_p(src_path)
+        FileUtils.mkdir_p(data_dir) # Ensure _data directory exists
         File.open(data_path, 'w') do |file|
           file.write(JSON.pretty_generate(collection_data))
         end
-        puts "Updated _data/transcript-collection.json with new content"
+        puts "Updated #{data_path} with new content" # Updated log message
       else
-        puts "No changes to _data/transcript-collection.json, keeping existing file"
+        puts "No changes to #{data_path}, keeping existing file" # Updated log message
       end
     end
   end
