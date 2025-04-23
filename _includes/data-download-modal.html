@@ -29,6 +29,10 @@
                     </div>
                 </div>
                 {%- endif -%}
+                {% if site.data.filters %}
+                
+                        {% include transcript/download-json-button.html %}
+                {%- endif -%}
                 {% if site.data.theme.metadata-facets-fields %}
                 <div class="card my-3">
                     <div class="card-body">

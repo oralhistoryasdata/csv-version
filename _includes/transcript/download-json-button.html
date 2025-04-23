@@ -1,7 +1,11 @@
 {% comment %}
 Create this file as _includes/transcript/download-json-button.html
 {% endcomment %}
-
+<div class="card my-3">
+  <div class="card-body">
+      <h2 class="card-title h4">Transcripts as JSON</h2>
+      <p class="card-text">Access structured transcript data in JSON format for research, analysis, or integration with other applications.</p>
+{% if site.data.theme.json-generation %}
 <div class="dropdown d-inline-block">
   <button class="btn btn-outline-primary dropdown-toggle" type="button" id="jsonDownloadButton" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="fas fa-download"></i> Download Data
@@ -9,7 +13,7 @@ Create this file as _includes/transcript/download-json-button.html
   <ul class="dropdown-menu" aria-labelledby="jsonDownloadButton">
     <li><h6 class="dropdown-header">Complete Collection</h6></li>
     <li><a class="dropdown-item" href="{{ "/assets/data/transcript-collection.json" | relative_url }}" download><strong>Complete Transcript Collection (JSON)</strong></a></li>
-    <li><a class="dropdown-item" href="{{ "/assets/data/transcripts/index.json" | relative_url }}" download>Transcript Index (JSON)</a></li>
+   
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header">Individual Transcripts</h6></li>
     {% for transcript in site.data.transcripts %}
@@ -18,4 +22,8 @@ Create this file as _includes/transcript/download-json-button.html
     <li><a class="dropdown-item" href="{{ "/assets/data/transcripts/" | append: transcript-name | append: ".json" | relative_url }}" download>{{ transcript_item.title | default: transcript-name }}</a></li>
     {% endfor %}
   </ul>
+</div>{% else %}
+<a class="btn btn-outline-primary" role="button" href="{{ "/assets/data/transcript-collection.json" | relative_url }}" download><strong>Complete Transcript Collection (JSON)</strong></a>
+{% endif %}
+</div>
 </div>
