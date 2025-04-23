@@ -1,7 +1,7 @@
 ---
 # generate full transcript data as json
 ---
-{%- assign items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.title and item.search_index != "false"' -%}
+{%- assign items = site.data[site.metadata] | where_exp: 'item','item.objectid and item.title and item.display_template == "transcript"' -%}
 {
     "metadata": {
         "id": "{{ site.baseurl | slugify }}",
@@ -19,8 +19,9 @@
         "transcript_count": {{ items.size }}
     },
     "transcripts": {
-        {% for item in items %}
-        {% assign transcript_id = item.object_transcript | split: '/' | last | replace: '.csv','' %}{% assign transcript = site.data.transcripts[transcript_id] %}
+        {% for item in items  %}
+        {% assign transcript_id = item.objectid %}
+        {% assign transcript = site.data.transcripts[transcript_id] %}
         "{{ item.objectid }}": {
             "title": {{ item.title | jsonify }},
             "interviewee": {{ item.interviewee | jsonify }},
