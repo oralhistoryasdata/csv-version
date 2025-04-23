@@ -27,5 +27,4 @@ jobs:
       - name: Run Rake Task if Condition is True
         if: env.json_generation == 'true'
         run: |
-          bundle install
           rake generate_json
