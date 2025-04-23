@@ -79,3 +79,11 @@ exclude: [docs/, Rakefile, README.md, LICENSE, CITATION.cff, CODE_OF_CONDUCT.md,
 # compress CSS output
 sass:
   style: compressed
+
+
+# Defaults to simplify front matter
+defaults:
+  - scope:
+      path: "content"
+    values:
+      layout: "lesson-content"

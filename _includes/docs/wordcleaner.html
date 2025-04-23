@@ -1,0 +1,20 @@
+<script language="JavaScript"> 
+var swapCodes   = new Array(8211, 8212, 8216, 8217, 8220, 8221, 8226, 8230); // dec codes from char at
+var swapStrings = new Array("--", "--", "'",  "'",  "\"",  "\"",  "*",  "...");  
+function cleanWordClipboard(input) {
+// debug for new codes
+// for (i = 0; i < input.length; i++)  alert("'" + input.charAt(i) + "': " + input.charCodeAt(i));    
+var output = input;
+for (i = 0; i < swapCodes.length; i++) {
+var swapper = new RegExp("\\u" + swapCodes[i].toString(16), "g"); // hex codes
+output = output.replace(swapper, swapStrings[i]);
+}
+return output;
+}
+</script> 
+<form name="wordCleaner" onsubmit="return false;"> 
+<textarea style="width: 720px; height: 150px" id="wordInput">[Paste Your Transcript Into this Form to be Cleaned!]</textarea>&nbsp;
+
+<textarea style="width: 720px; height: 150px" id="wordOutput">[Your Clean Trancrcipt will apear here after you click the Clean button below.]</textarea><br />
+<button class="btn btn-success btn-lg mb-4" onClick='document.getElementById("wordOutput").value = cleanWordClipboard(document.getElementById("wordInput").value)'>Clean</button> 
+</form> 
