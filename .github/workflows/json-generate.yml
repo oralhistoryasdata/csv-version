@@ -34,3 +34,12 @@ jobs:
         if: env.json_generation == 'true'
         run: |
           bundle exec rake generate_json
+      
+      - name: Commit and push changes
+        if: env.json_generation == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/data/transcripts/*.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generated JSON files"
+          git push
