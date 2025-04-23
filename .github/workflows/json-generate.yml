@@ -20,11 +20,11 @@ jobs:
           # Install yq for parsing YAML files
           sudo apt-get update && sudo apt-get install -y yq
           # Extract the value of the key (e.g., "generate_json") from _data/theme.yml
-          VALUE=$(yq eval 'json-generation' _data/theme.yml)
-          echo "generate_json=$VALUE" >> $GITHUB_ENV
+          VALUE=$(yq eval '.json-generation' _data/theme.yml)
+          echo "json-generation=$VALUE" >> $GITHUB_ENV
 
       - name: Run Rake Task if Condition is True
-        if: env.generate_json == 'true'
+        if: env.json-generation == 'true'
         run: |
           bundle install
           rake generate_json
