@@ -1,14 +1,34 @@
+##################################################
+########## ORAL HISTORY as Data OPTIONS ##########
+##################################################
+
 ##########
-# CollectionBuilder Theme Customization
+# Transcript Page / Oral History as Data Options 
+# 
+transcript-fields: "description,date,location,interviewer,image" # choose from the following fields --> description,date,location,interviewer,interviewee,bio,image 
+# list the fields you'd like displayed, separated by comma
+media-scroll: true ## true/false or blank --> determines if the media and visualization will appear to the lower right as a user scrolls down a transcript. This only appears on larger screens (min width 1024px).
+search-and-filters: true ## true/false --> determines if the search and filter options that appears above the text of an interview/transcript 
+search-and-filters-sticky: true ## true/false --> determines if the search and filter options are sticky to the top of the page as a user scrolls down a transcript
+
+##########
+# Visualization page / Oral History as Data Options 
+# 
+as-data: true ## true/false --> determines if the "As Data" button and modal that pops up if you click it will appear at the top right of the visualization page
+transcript-contents: true ## true/false --> determines if the contents of the individual interviews will appear and be filtered at the bottom of the visualization page (below the color coded portion)
+json-generation: false ## true/false --> defaults to false (see note below if you turn to true!). This determines if JSON files will be accessed for the visualization page. 
+### Warning!!! If you turn the above option `json-generation` to true, you'll need to run the rake command `generate_json` -- that command will generate the necessary json files for your collection. 
+
+##########
+# OHD + CollectionBuilder Theme Customization
 # values set here help configure details of individual pages in the website
 ##########
 
 ##########
 # HOME PAGE
-#
-# The optional vizualization on the home page is a composite of the transcripts color-coded representation 
+# The optional visualization on the home page is a composite of the transcripts color-coded representation 
 # To turn it off, either don't include a filters.
-home-page-visualization: https://ctrl-shift.org/images/gluck.jpg
+home-page-visualization: true # true / false, if true, the visualization will appear on the home page
 # This will determine the height of the visualization on the home page
 home-page-visualization-size: 30%
 # featured image is used in home page banner and in meta markup to represent the collection
@@ -80,22 +100,6 @@ data-child-objects: false # true / false - if true, child objects will appear li
 carousel-child-objects: false # true / false - if true, child objects will appear on homepage carousel
 browse-child-objects: false # true / false - if true, child objects will appear on browse page and child objects' metadata will populate cloud pages like Subjects page and Locations page, as well as featured terms boxes on the home page
 search-child-objects: true # true / false - if true, child objects will appear on on search page along with parent objects
-
-
-##########
-# Transcripts / Oral History as Data Options 
-# 
-transcript-fields: "description,date,location,interviewer,image" # choose from the following fields --> description,date,location,interviewer,interviewee,bio,image 
-# list the fields you'd like displayed, separated by comma
-media-scroll: true ## true/false or blank --> determines if the media and visualization will appear to the lower right as a user scrolls down a transcript. This only appears on larger screens (min width 1024px).
-search-and-filters: true ## true/false --> determines if the search and filter options that appears above the text of an interview/transcript 
-search-and-filters-sticky: true ## true/false --> determines if the search and filter options are sticky to the top of the page as a user scrolls down a transcript
-
-##########
-# Visualization page / Oral History as Data Options 
-# 
-as-data: true ## true/false --> determines if the "As Data" button and modal that pops up if you click it will appear at the top right of the visualization page
-transcript-contents: true ## true/false --> determines if the contents of the individual interviews will appear and be filtered at the bottom of the visualization page (below the color coded portion)
 
 
 ##########

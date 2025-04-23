@@ -27,10 +27,13 @@
       <p class="lead">{{site.tagline}}</p>
       {% include index/nav-buttons.html %}
       </div>
-      {% if site.data.filters and site.data.theme.home-page-visualization != false %}
+      
       
    <div class="col-md-6 my-auto">
+    {% if site.data.filters and site.data.theme.home-page-visualization != false %}
 {% include transcript/index/viz-overview.html height="450px"%}
+{% else %}
+{% include feature/image.html objectid=site.data.theme.featured-image caption=false link="browse.html"%}
     </div> 
    {% endif %}
         </div>
