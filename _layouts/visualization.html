@@ -94,14 +94,6 @@ custom-foot: transcript/js/visualization-js.html
   </div>
 </div>
 
-
-<!-- Add download button for JSON data -->
-<div class="container mb-5">
-  <h3>Data Access</h3>
-  <p>Access the raw transcript data in JSON format:</p>
-  {% include transcript/download-json-button.html %}
-</div>
-
 <script>
   // This script just defines which transcripts are available
   // The actual content loading happens in visualization-json.js
@@ -137,3 +129,11 @@ custom-foot: transcript/js/visualization-js.html
   {% endfor %}{% endfor %}
   {% endif %}
 {% endunless %}
+
+<br />
+<hr /><br />
+<!-- Add download button for JSON data -->
+<div class="container mb-5">
+  <h3>Data Access</h3>
+  {% include transcript/download-json-button.html %}
+</div>
