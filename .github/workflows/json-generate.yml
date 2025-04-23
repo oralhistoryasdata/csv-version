@@ -18,11 +18,10 @@ jobs:
         id: read-theme
         run: |
           # Install yq for parsing YAML files
-          sudo apt-get install -y wget
-          wget https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64 -O /usr/bin/yq
-          chmod +x /usr/bin/yq
+          wget https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64 -O ./yq
+          chmod +x ./yq
           # Extract the value of the key from _data/theme.yml
-          VALUE=$(yq '.json-generation' _data/theme.yml)
+          VALUE=$(./yq '.json-generation' _data/theme.yml)
           echo "json_generation=$VALUE" >> $GITHUB_ENV
 
       - name: Run Rake Task if Condition is True
