@@ -19,10 +19,8 @@ SOURCE_DIR = File.dirname(__FILE__) # Project root
 DATA_DIR = File.join(SOURCE_DIR, '_data')
 # Assuming transcript CSVs are in a subdirectory named 'transcripts' within _data
 TRANSCRIPTS_DATA_DIR = File.join(DATA_DIR, 'transcripts')
-# Target directory for individual JSONs and index.json within the source 'assets'
+# Target directory for individual JSONs within the source 'assets'
 ASSETS_TARGET_DIR = File.join(SOURCE_DIR, 'assets', 'data', 'transcripts')
-# Target file for the combined collection JSON within '_data'
-COLLECTION_FILE_PATH = File.join(DATA_DIR, 'transcript-collection.json')
 # Support these file types (from generate_derivatives, keep it global if potentially reusable)
 EXTNAME_TYPE_MAP = {
   '.jpeg' => :image,
@@ -200,7 +198,7 @@ end
 # TASK: generate_json
 ###############################################################################
 
-desc "Generate individual, index, and collection JSON files from transcript CSVs"
+desc "Generate individual JSON files from transcript CSVs"
 task :generate_json do
   puts "Starting JSON generation task..."
 
@@ -324,56 +322,6 @@ task :generate_json do
     end
   end
   puts "Finished processing individual transcripts."
-
-  # 8. Create and Write Index JSON to source assets directory
-  puts "Generating index file..."
-  index_data = transcripts.keys.map do |transcript_name|
-    metadata = metadata_collection.find { |item| item[:objectid]&.to_s == transcript_name } || {}
-    {
-      'id' => transcript_name,
-      'title' => metadata[:title] || transcript_name,
-      'interviewee' => metadata[:interviewee] || metadata[:title] || transcript_name,
-      'date' => metadata[:date],
-      # This URL assumes Jekyll will serve files from 'assets' at the root
-      'url' => "/assets/data/transcripts/#{transcript_name}.json"
-    }
-  end
-  index_path = File.join(ASSETS_TARGET_DIR, 'index.json')
-  begin
-    File.open(index_path, 'w') do |file|
-      file.write(JSON.pretty_generate(index_data))
-    end
-    puts "Successfully wrote index file: #{index_path}"
-  rescue => e
-    puts "Error writing index file #{index_path}: #{e.message}"
-  end
-
-  # 9. Write Collection JSON to _data (with content hash check)
-  puts "Generating collection file..."
-  should_write_collection = true
-  new_content_json = JSON.pretty_generate(collection_data) # Generate once
-  if File.exist?(COLLECTION_FILE_PATH)
-    existing_content = File.read(COLLECTION_FILE_PATH)
-    # Compare hashes to avoid writing if content is identical
-    existing_hash = Digest::SHA256.hexdigest(existing_content)
-    new_hash = Digest::SHA256.hexdigest(new_content_json)
-    should_write_collection = (existing_hash != new_hash)
-  end
-
-  if should_write_collection
-    begin
-      File.open(COLLECTION_FILE_PATH, 'w') do |file|
-        file.write(new_content_json)
-      end
-      puts "Updated collection file: #{COLLECTION_FILE_PATH}"
-    rescue => e
-      puts "Error writing collection file #{COLLECTION_FILE_PATH}: #{e.message}"
-    end
-  else
-    puts "No changes detected for collection file: #{COLLECTION_FILE_PATH}. File not updated."
-  end
-
-  puts "JSON generation task complete."
 end
 
 # Optional: Make this the default task when running `rake`
