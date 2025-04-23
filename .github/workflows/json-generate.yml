@@ -13,6 +13,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Specify a Ruby version
+          bundler-cache: true # Runs 'bundle install' and caches installed gems
 
       - name: Read theme.yml
         id: read-theme
@@ -27,4 +33,4 @@ jobs:
       - name: Run Rake Task if Condition is True
         if: env.json_generation == 'true'
         run: |
-          rake generate_json
+          bundle exec rake generate_json
