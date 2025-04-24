@@ -1,17 +1,7 @@
 ---
-nav_order: 7
+nav_order: 9
 title: Resources for Further Learning
 ---
-
-The technologies listed below are those that enable the Oral History as Data project. We also created several modules to help students and instructors better work through these technologies and concepts in a tutorial format. Those modules are linked below: 
-
-- <https://github.com/learn-static/foundations-0-github>
-- <https://github.com/learn-static/foundations-1-html>
-- <https://github.com/learn-static/foundations-2-markdown>
-- <https://github.com/learn-static/foundations-3-data>
-- <https://github.com/learn-static/foundations-4-computation>
-
-
 
 ## Technologies
 

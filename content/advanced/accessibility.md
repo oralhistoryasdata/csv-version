@@ -1,12 +1,13 @@
 ---
-section: Advanced Topics
-nav_order: 5
+nav_order: 7
 title: Accessibility
 ---
 
 # Making Oral Histories Accessible
 
-Creating accessible oral history collections ensures that your valuable content can be used by everyone, including people with disabilities. This guide covers strategies for improving the accessibility of your Oral History as Data project.
+The Oral History as Data (OHD) framework has been extensively tested for accessibility using a variety of tools and analyses, consistently receiving high grades in compliance tests. However, it's important to note that ultimate responsibility for ensuring accessibility falls on those who publish oral history collections. While OHD provides an accessible foundation, content creators must implement best practices when adding their specific materials.
+
+This guide aims to help collection publishers understand accessibility requirements and implement features that make oral histories accessible to all users, including people with disabilities.
 
 ## Understanding Accessibility in Oral History
 
@@ -171,16 +172,6 @@ Use these tools for initial testing:
    - Invite users with disabilities to test your site
    - Gather feedback on usability challenges
    - Implement improvements based on feedback
-
-## Case Study: Accessible Oral History Implementation
-
-The University of Massachusetts Boston's [Mass. Memories Road Show](https://openarchives.umb.edu/digital/collection/p15774coll6) incorporates several best practices:
-
-- Structured, timestamped transcripts
-- Multiple access points to content
-- Keyboard-accessible interface
-- Strong contrast in visualization elements
-- Alternative text for visual elements
 
 ## Resources
 

@@ -1,7 +1,7 @@
 ---
-section_id: Publish and Connect
+section_id: Publish Your Site
 nav_order: 6
-title: Publishing & Media
+title: Publishing Your Site
 ---
 
 # Publishing and Connecting Media

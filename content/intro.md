@@ -5,20 +5,39 @@ title: How OHD Works
 
 OHD uses a CSV-driven approach to manage your collection. Rather than creating individual web pages for each interview, you'll manage all your interviews through a simple spreadsheet and let the system automatically generate the web presentation.
 
+## Project Structure Overview
+
+```
+your-repository/
+├── _data/
+│   ├── your-metadata.csv     # Your collection metadata file
+│   ├── filters.csv           # Your coding vocabulary
+│   ├── theme.yml             # Your site configuration (basic customizations)
+│   └── transcripts/          # Folder for transcript CSVs
+│       └── transcript1.csv   # Sample transcript 1
+│       └── transcript2.csv   # Sample transcript 2
+├── _config.yml               # Project configuration (title, metadata, etc.)
+└── objects/                  # Folder for interview images
+```
+
+
 ## The Complete Workflow
 
-**1. Prepare Your Environment**
+**1. Setup Your Environment**
 - Create a copy of the OHD GitHub Repository
 - Configure your project settings
 
-**2. Prepare Your Interviews**
+**2. Prepare Your Content**
 - Transform interview transcripts into structured CSV files (see [examples](/examples/))
 - Add metadata through a spreadsheet (based on [CollectionBuilder-CSV](https://collectionbuilder.github.io/cb-docs/docs/metadata/csv_metadata/))
     - Connect transcripts with audio/video sources via Metadata (optional)
+- Code Your Transcripts (Optional)**
+    - Create a controlled vocabulary for coding
+    - Apply thematic codes to your transcript content
 
-**3. Develop Your Analysis Framework (Optional)**
-- Create a controlled vocabulary for coding
-- Apply thematic codes to your transcript content
+**3. Customize Your Site**
+- ah
+- 
 
 **4. Publish and Share**
 - Publish your collection using GitHub Pages

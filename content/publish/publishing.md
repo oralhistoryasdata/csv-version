@@ -1,7 +1,7 @@
 ---
-section: Publish and Connect
-nav_order: 3
-title: Publishing Your Site
+section: Publish Your Site
+nav_order: 2
+title: Publishing via GitHub Pages
 ---
 
 # Publishing Your Site on GitHub Pages
@@ -17,52 +17,20 @@ GitHub Pages is a free hosting service that publishes websites directly from Git
 - It automatically updates when you make changes
 - It provides a reliable, secure web presence
 
-## Activate GitHub Pages
+## GitHub Actions
 
-1. From your repository's homepage, click the "Settings" tab in the top menu bar
-   
-   {% include docs/bootstrap/figure.md img="howto/settings_button.png" caption="Settings button" alt="Location of the Settings tab on GitHub" class="w-75" %}
+GitHub Actions allows you to use GitHub Pages to host an OHD site on GitHub that require custom plugins. This is important since the default GitHub Pages process doesn't support plugins needed by CB-CSV.
 
-2. In the left sidebar, find the "Pages" option under "Code and automation"
-   
-3. Under "Source", change the dropdown from "None" to "main"
-   
-4. Keep the folder set as "/ (root)"
-   
-5. Click "Save"
-   
-6. After saving, the page will refresh with a notice containing your site's URL
-   
-   {% include docs/bootstrap/alert.md text="Note: It typically takes 1-5 minutes for your site to become available at the provided URL. If you visit too quickly, you'll see a 404 error." color="info" %}
+- **Setup**: Configure through repository Settings > Pages
+- **Process**: Creates a workflow file (.github/workflows/jekyll.yml) that builds your site with the correct Jekyll version
+- **Benefits**: Free hosting with the ability to use plugins
+- **Documentation**: [GitHub Actions Guide](https://collectionbuilder.github.io/cb-docs/docs/deploy/actions/)
 
-## Add the URL to Your Repository Information
 
-While waiting for your site to build, add the URL to your repository description:
+{% include docs/button.html text="Check out our Step by Step Tutorial to Learn More" color="outline-primary btn-lg" link="content/publish/tutorial-publishing.html"%}
 
-1. Copy the URL GitHub provided (usually in the format `https://username.github.io/repository-name`)
 
-2. Go back to your repository's main page
 
-3. Look for the "About" section on the right sidebar
-
-4. Click the gear icon next to "About"
-
-5. Paste your URL into the "Website" field
-
-6. Click "Save changes"
-
-This makes it easy to find your site URL in the future and shows visitors where to view your project.
-
-## Verify Your Site is Live
-
-1. Wait 3-5 minutes for GitHub to build your site
-
-2. Visit your site URL to confirm it's working properly
-
-3. If you see a 404 error after waiting 5 minutes:
-   - Double-check that you configured the GitHub Pages settings correctly
-   - Ensure your repository is public, not private
-   - Check for any error messages in the Settings > Pages section
 
 ## GitHub Pages Usage Guidelines
 
@@ -91,7 +59,3 @@ GitHub Pages is intended for documentation and small project sites. Keep these g
 {% endcapture %}
 
 {% include docs/bootstrap/alert.md text=media_note color="secondary" %}
-
-## Next Steps
-
-Now that your site is published, you're ready to [prepare your content](../prepare/overview.html) for the site.

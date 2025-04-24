@@ -48,17 +48,6 @@ source-code: https://github.com/username/repository-name
 content_license: "CC BY-SA"
 ```
 
-### Theme Customization (Optional)
-
-You can customize the site's appearance by uncommenting and modifying these lines:
-
-```yaml
-# These options tweak CSS values
-header-background: "#17a2b8"
-header-text-color: "#ffffff" 
-link-color: "#17a2b8"
-text-color: "#333333"
-```
 
 ### Metadata Configuration
 
