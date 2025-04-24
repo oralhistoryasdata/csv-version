@@ -1,10 +1,8 @@
 ---
 section_id: Prepare Your Metadata
-nav_order: 4
+nav_order: 5
 title: Metadata Preparation
 ---
-
-# Preparing Your Collection Metadata
 
 This section focuses on creating the metadata spreadsheet that serves as the central registry for all interviews in your Oral History as Data project. Proper metadata is essential for organizing your collection and enabling search functionality.
 

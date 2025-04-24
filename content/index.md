@@ -1,9 +1,9 @@
 ---
 title: Oral History as Data
-layout: page
+layout: lesson-content
 ---
 
-# A Researcher's Guide to Digital Oral History
+## Documentation 
 
 **Oral History as Data** is a powerful tool for researchers, archivists, and oral history practitioners to prepare, publish, and analyze interview transcripts. This platform streamlines the process of working with qualitative interviews, enabling you to:
 

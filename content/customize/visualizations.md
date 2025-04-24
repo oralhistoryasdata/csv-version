@@ -13,105 +13,161 @@ The visualization system is a core feature of Oral History as Data, enabling res
 Oral History as Data creates interactive visualizations by:
 
 1. Reading the tags from your transcript CSV files
-2. Matching them to the definitions in your filters.csv
-3. Assigning colors to each tag category
-4. Rendering an interactive interface where users can:
-   - Filter by specific tags
-   - Click on colored segments to read the associated text
-   - Navigate between related content across interviews
+2. Matching them to the color definitions generated from your `_data/filters.csv` file
+3. Rendering colored segments that represent the coded sections of each interview
+4. Providing an interactive interface where users can:
+   - Filter by specific tags to see only relevant content
+   - Click on colored segments to view the associated transcript text
+   - Navigate between related content across multiple interviews
+
+The visualizations are displayed at the top of the page, with filterable transcript content below.
 
 {% include docs/bootstrap/figure.md img="examples/visualization-example.jpg" caption="The OHD visualization interface highlights coded segments" alt="Screenshot of the OHD visualization interface" class="w-75" %}
 
-## Customizing the Visualization Interface
+## Customizing the Visualization System
 
-### Modifying Tag Colors
+### 1. Modifying Tag Colors
 
-The color scheme for tags is defined in the `_data/filters.csv` file, but you can override these with custom CSS:
+Colors for transcript tags are automatically assigned in the `_includes/transcript/style/filter-style.html` file using a color cycle. To customize these colors:
 
-1. Create a file called `_sass/_custom.scss` in your repository
-2. Add CSS targeting the tag classes:
+**Option A: Edit filter-style.html (Recommended)**
+
+1. Create a copy of `_includes/transcript/style/filter-style.html` in your repository
+2. Modify the color cycle list with your preferred colors:
+
+```html
+{% raw %}
+<style>
+  {% for n in site.data.filters %}
+  {% capture color %}{% cycle '#e6194b','#3cb44b','#ffe119','#4363d8','#f58231','#911eb4','#46f0f0','#f032e6' %}{% endcapture %}
+  .{{ n.tag | slugify }} { 
+    fill: {{color}};
+    border-color: {{color}};
+  }
+  .{{ n.tag | slugify }}.primary-{{ n.tag | slugify }}{ 
+    fill: {{color}} !important;
+  }
+  {% endfor %}
+</style>
+{% endraw %}
+```
+
+**Option B: Override with Custom CSS**
+
+1. Create a file called `_sass/_custom.scss` (or edit if it exists)
+2. Add CSS targeting the tag classes with `!important` to override default styling:
 
 ```scss
 /* Custom tag colors */
-.film-writing {
-  background-color: #8B4513 !important;
+.education { 
+  fill: #8B4513 !important;
+  border-color: #8B4513 !important;
 }
 .technology {
-  background-color: #4682B4 !important;
+  fill: #4682B4 !important;
+  border-color: #4682B4 !important;
 }
-/* Add more custom colors as needed */
 ```
 
-### Adjusting the Visualization Layout
+### 2. Enabling JSON-based Lazy Loading
 
-To modify the layout of the visualization interface:
+OHD 2025 version includes an optimized visualization system that lazily loads transcript content for better performance. This is ideal for larger collections:
 
-1. Override the subjects.html layout by creating a file at `_layouts/subjects.html`
-2. Copy the original layout from the template as your starting point
-3. Modify the HTML and Bootstrap classes to adjust:
-   - Column widths
-   - Button appearance
-   - Spacing and margins
-   - Header and footer elements
+1. In `_config.yml`, ensure the JSON generation is enabled:
 
-### Adding Custom Filters
+```yaml
+# in _config.yml
+theme:
+  json-generation: true
+```
 
-The standard visualization allows filtering by individual tags, but you can create custom filter combinations:
+2. This activates the `viz-json.html` system that:
+   - Loads transcript data only when a user selects a filter
+   - Caches data to avoid repeated network requests
+   - Shows a loading indicator during data retrieval
+   - Offers better performance for large collections
 
-1. Modify the `_includes/js/transcript-view.js` file
-2. Add custom filter functions for tag combinations
-3. Create new UI elements to trigger these filters
+### 3. Customizing the Visualization Layout
 
-### Visualization Examples from Other Projects
+To modify the layout of the visualization page:
 
-The [Voices of Gay Rodeo](https://www.voicesofgayrodeo.com/) project includes several custom visualization enhancements:
+1. **Create a custom layout file**:
+   - Copy `_layouts/visualization.html` to your repository
+   - Edit to adjust spacing, column widths, and other layout elements
 
-- Custom color schemes related to the project's branding
-- Modified layout with larger transcript text
-- Additional navigation elements
-- Integration with archival photographs
+2. **Modify key visualization components**:
+   - The filter legend circles are defined in `_includes/visualization-filter-legend.html`
+   - The transcript content display is in the visualization layout file
+   - Bootstrap grid classes can be adjusted to change column layouts
 
-{% include docs/bootstrap/figure.md img="examples/vogr-visualization.jpg" caption="Custom visualization in Voices of Gay Rodeo" alt="Screenshot of a custom visualization in the Voices of Gay Rodeo project" class="w-75" %}
+Example of modifying the filter legend columns:
 
-## Creating Custom Visualizations
+```html
+<!-- Change the column layout from 4 filters per row to 3 -->
+{% raw %}
+{% for n in site.data.filters %}
+<div class="col-md-4 col-6"> <!-- Changed from col-md-3 col-4 -->
+  <svg class="legend" width="100%" height="25px" data-id="{{ n.tag | slugify }}">
+    <!-- Content remains the same -->
+  </svg>
+</div>
+{% endfor %}
+{% endraw %}
+```
 
-Beyond modifying the built-in visualization, you can create entirely new ways to visualize your oral history data:
+## Real-World Customization Examples
 
-### Tag Co-occurrence Network
+### Voices of Gay Rodeo Project
 
-Visualize relationships between tags by creating a network diagram showing which tags commonly appear together:
+The [Voices of Gay Rodeo](https://www.voicesofgayrodeo.com/) project shows several customization approaches:
 
-1. Export your tag data using the built-in JSON endpoints
-2. Use D3.js or a similar library to create a force-directed graph
-3. Size nodes by tag frequency and links by co-occurrence strength
+- **Custom color palette** aligned with the project branding
+- **Modified layout** with larger transcript display
+- **Enhanced navigation** between transcript segments
 
-### Timeline Visualization
+### CTRL+Shift Poetry Project
 
-Create chronological views of your interviews:
+[CTRL+Shift](https://ctrl-shift.org/) demonstrates:
 
-1. Export timestamp data from your transcripts
-2. Create a custom timeline interface using JavaScript libraries like TimelineJS
-3. Integrate with your topic tags for filterable timelines
+- **Custom filter organization** by grouping related tags
+- **Project-specific typography** for better poetry display
+- **Content organization** tailored to literary analysis
 
-### Geographic Visualization
+## Advanced Customization Options
 
-For interviews with location data:
+### Modifying JavaScript Behavior
 
-1. Extract location information from your metadata
-2. Create an interactive map using Leaflet or MapboxGL
-3. Link map points to interview segments
+The visualization system uses JavaScript to handle filtering and user interactions:
 
-## Advanced JavaScript Customization
+1. **For lazy loading visualization** (default in 2025 version):
+   - Core functionality is in `_includes/transcript/js/viz-json.html`
+   - This manages asynchronous loading and filtering
 
-For developers comfortable with JavaScript, the visualization system can be extensively customized:
+2. **For standard visualization**:
+   - Core functionality is in `_includes/transcript/js/viz-base.html`
+   - This processes all transcript data at page load
 
-1. Examine the core visualization code in `_includes/js/transcript-view.js`
-2. Create a custom JavaScript file in your project's `assets/js/` directory
-3. Override or extend the default behavior with your own functions
-4. Link to your custom JavaScript in the site layout
+To customize behavior:
+1. Copy the appropriate file to your repository
+2. Modify the JavaScript functions to change filtering behavior
+3. Test thoroughly to ensure compatibility
 
-## Resources
+### Creating Custom Visualizations with JSON Data
 
-- [Bootstrap Documentation](https://getbootstrap.com/docs/) - OHD uses Bootstrap for its layout
-- [D3.js](https://d3js.org/) - Powerful library for custom data visualizations
-- [GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) - Underlying technology for site customization
+The OHD system generates JSON files of your transcript data that can be used to create custom visualizations:
+
+1. **Access the data**:
+   - Transcript JSON is available at `/assets/data/transcripts/[transcript-id].json`
+   - Filter definitions at `/assets/data/filters.json`
+
+2. **Example uses**:
+   - Create tag frequency charts with D3.js
+   - Build custom filtering interfaces 
+   - Develop alternative visualization layouts
+
+## Resources and Tools
+
+- [Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.0/) - OHD uses Bootstrap for layout
+- [JSON Documentation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - For working with OHD data
+- [Jekyll Documentation](https://jekyllrb.com/docs/) - For understanding the site structure
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) - For inspecting and debugging customizations

@@ -1,6 +1,6 @@
 ---
 section_id: Publish Your Site
-nav_order: 6
+nav_order: 7
 title: Publishing & Media Integration
 ---
 

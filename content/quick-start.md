@@ -53,16 +53,16 @@ You'll need a main CSV and transcript CSV files:
 1. Create or edit `_data/filters.csv`
 2. Define your tag codes and descriptions
 3. Apply these codes in the "tags" column of your transcript files
-4. You can also use our [Python scripts] to automatically tag your transcripts.
+4. You can also use our [Python scripts](https://journal.code4lib.org/articles/18286) to automatically tag your transcripts.
 
 ### 5. Publish Your Site
 
 1. Go to Settings → Pages in your GitHub repository
 2. In the Build and Deployment section, Select "GitHub Actions" from the dropdown options (change from "Deploy from a branch")
 3. An option for "GitHub Pages Jekyll" will appear. Click "Configure"
-4. A new page will open with a file appear ("jekyll-gh-page.yml")
+4. A new page will open with a GitHub Action file opened 
 5. Click the green "Commit Changes" button at the top right
-6. A modal will appear, and you can then describe the change or just click the green "Commit Changes" on the bottom right
+6. A modal will appear: just click the green "Commit Changes" on the bottom right
 7. Wait a few minutes for your site to build
 8. Access your site at the URL provided
 
