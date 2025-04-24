@@ -36,8 +36,8 @@ your-repository/
     - Apply thematic codes to your transcript content
 
 **3. Customize Your Site**
-- ah
-- 
+- Configure theme settings and appearance
+- Set up visualization options and coding structure
 
 **4. Publish and Share**
 - Publish your collection using GitHub Pages

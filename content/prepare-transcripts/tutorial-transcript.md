@@ -4,129 +4,92 @@ nav_order: 7
 title: Tutorial - Transcript Preparation
 ---
 
-# Step-by-Step Tutorial: Preparing Interview Transcripts
+# Converting Interview Transcripts to CSV Format
 
-This tutorial guides you through the detailed process of transforming a raw interview transcript into a properly formatted CSV file ready for use with Oral History as Data. Follow these steps if you're starting with a plain text transcript and need detailed guidance.
+This tutorial provides a streamlined process for converting standard interview transcripts into the structured CSV format required by Oral History as Data.
 
-## Before You Begin
+## Prerequisites
 
-You should have:
-- A raw interview transcript (text file, Word document, etc.)
+- An interview transcript (Word document, text file, etc.)
 - A spreadsheet program (Google Sheets recommended)
-- Basic understanding of CSV file format
+- 20-30 minutes per transcript (varies with length)
 
-## Tutorial Outline
+## Quick Process Overview
 
-1. [Copy the Template](#step-1-copy-the-template)
-2. [Clean Your Text](#step-2-clean-your-text)
-3. [Transform into Spreadsheet](#step-3-transform-into-spreadsheet)
-4. [Separate by Speaker](#step-4-separate-by-speaker)
-5. [Check for Errors](#step-5-check-for-errors)
-6. [Polish the Final Transcript](#step-6-polish-the-final-transcript)
+1. Create a spreadsheet with the required columns
+2. Clean your transcript text
+3. Add text to spreadsheet, separating by speaker
+4. Add timestamps and tags (optional)
+5. Save as CSV with proper filename
 
-## Step 1: Copy the Template
+## Step 1: Prepare Your Spreadsheet
 
-Start by creating a copy of our transcript template:
+1. **Create a new spreadsheet** in Google Sheets
+2. **Add these column headers** in row 1:
+   - **speaker** - Who is speaking in this segment
+   - **words** - The actual transcript text
+   - **tags** - Topic codes for visualization (optional)
+   - **timestamp** - Time markers for audio/video sync (optional)
 
-1. Open [this Google Sheets template](https://docs.google.com/spreadsheets/d/1PZ4b1B8IlR9MGlYkCJFJBNGkCHGxzPPFMmUJ9QfwCE4/copy)
-2. Click "Make a copy"
-3. Rename your copy to match your interview's objectid (e.g., "smith_john.csv")
-4. Note the column headers: **speaker**, **words**, **tags**, **timestamp**
+Alternatively, use our [template spreadsheet](https://docs.google.com/spreadsheets/d/1PZ4b1B8IlR9MGlYkCJFJBNGkCHGxzPPFMmUJ9QfwCE4/copy) (click "Make a copy").
 
-## Step 2: Clean Your Transcript 
+## Step 2: Clean Your Transcript Text
 
-We clean text before we use it in order to stave off later problems. Smart quotes, single character ellipses, and other artifacts won't render correctly on the web so it's best to clean your text before you transform it for the tool. 
+Use the text cleaner tool to remove formatting artifacts:
 
-Microsoft Word and Excel both add additional encoded characters (some of which are invisible!!) that will lead an application like ours to crash or that will cause web pages to render text incorrectly. 
+{% include docs/wordcleaner.html %}
 
-Cleaner text also enables easier transfer between formats. By using the forms below, your text should should also be put in a format that is easier to nicely paste into a spreadsheet. 
+1. **Paste your raw transcript** in the top box
+2. **Click "Clean Text"**
+3. **Copy the cleaned text** from the bottom box (Ctrl+A, then Ctrl+C)
 
-So please clean your transcript by pasting your transcript in the upper form and pushing the clean button below the lower form: 
+This removes problematic characters that can cause display issues.
 
-{% include docs/wordcleaner.html%}
+## Step 3: Add Text to Spreadsheet
 
+1. **Paste cleaned text** under the "words" column
+2. **Separate by paragraph** - each paragraph should be in its own row
+3. **Identify speakers** - add speaker names in the "speaker" column:
+   - Be consistent with names (e.g., always use "Interviewer" or "Smith")
+   - Each row should contain text from only one speaker
 
-- Copy the clean version of your transcript from the bottom form by selecting all the text in the form: 
-    - Click into the form. 
-    - Push CTRL+A on your keyboard to select all of the text in the from. (You will see the contents become highlighted)
-    - Push CTRL+C to copy the text to your clipboard. 
-- You will paste your clean transcript into the blank transcript starter in the next step. 
+## Step 4: Add Optional Elements
 
-Common issues to fix on your own:
-- Smart/curly quotes (", ")
-- Em dashes (—)
-- Special symbols (©, ®, etc.)
-- Hidden formatting characters
+Add these elements if applicable to your project:
 
-## Step 3: Transform into Spreadsheet
+**Timestamps** (for audio/video):
+- Format as MM:SS or HH:MM:SS (e.g., 01:45 or 1:12:30)
+- Add to the "timestamp" column for each segment
 
-Now add your transcript to the spreadsheet:
+**Topic Tags** (for visualization):
+- Add relevant topic keywords in the "tags" column
+- Separate multiple tags with semicolons (e.g., "education; family; career")
+- Use consistent terminology across your project
 
-1. Go to your blank transcript template
-2. Click the cell under the "words" header
-3. Paste your cleaned transcript text
-4. If your text has paragraph breaks:
-   - Each paragraph should be in its own row
-   - If text appears with unwanted spaces between rows, use these steps:
-     - Copy all text to a Google Doc
-     - Select all text
-     - Click the line spacing button
-     - Select "Custom spacing"
-     - Set "Before" and "After" values to 0
-     - Apply and copy the text again
+## Step 5: Save as CSV
 
-## Step 4: Separate by Speaker
+1. **Review for errors**:
+   - Check for missing speaker labels
+   - Verify paragraph separation
+   - Ensure consistent formatting
 
-Next, identify and label each speaker:
-
-1. Look at your transcript to identify speaker changes
-2. In the "speaker" column, enter the name or identifier for each segment
-3. Common conventions:
-   - Use consistent names (e.g., "Interviewer", "Subject")
-   - For multiple interviewers, use names or initials ("JD", "AS")
-   - For anonymous segments, use a blank cell or placeholder
-
-## Step 5: Check for Errors
-
-Review your transcript for common problems:
-
-1. Scan for any missing speaker labels
-2. Check for paragraphs that should be split (multiple speakers in one cell)
-3. Look for special characters that might cause rendering issues
-4. Verify that dialogue flows logically between segments
-
-## Step 6: Polish the Final Transcript
-
-Add finishing touches to your transcript:
-
-1. Add timestamps if you have audio/video:
-   - Format: **MM:SS** or **HH:MM:SS**
-   - Place in the "timestamp" column
-   - Match to actual recording times
-   
-2. Add tags for visualization (can be done later):
-   - Use semicolons between multiple tags (e.g., "education; family; career")
-   - Follow your project's controlled vocabulary
-   
-3. Final check and save:
+2. **Save as CSV**:
    - File > Download > Comma-separated values (.csv)
-   - Ensure filename matches the objectid in your metadata
-   - Save using UTF-8 encoding
+   - Name the file to match your metadata objectid (e.g., if metadata objectid is "smith2023", name file "smith2023.csv")
 
-## Example of Completed Transcript
+3. **Upload to your repository**:
+   - Place in the _data/transcripts/ folder
 
-Here's a small sample of a properly formatted transcript:
+## Example of Proper Format
 
 ```
 speaker,words,tags,timestamp
-Interviewer,Could you tell me about your childhood?,background,[00:00]
-John Smith,"I grew up in Chicago in the 1960s. It was a different time then.",childhood; urban life,[00:15]
-Interviewer,What about your education?,education,[01:23]
-John Smith,"I attended Lincoln Elementary, then Washington High School.",education; schools,[01:35]
+Interviewer,What was your first teaching job?,career; education,00:15
+John Smith,"I started at Lincoln Elementary in 1972. It was a challenging environment but rewarding.",education; career; 1970s,00:22
+Interviewer,What subject did you teach?,education,01:05
+John Smith,"I taught sixth grade math and science, though I preferred the science lessons.",education; science; mathematics,01:12
 ```
 
-For complete examples, check our [sample transcript files](/examples/).
+For complete examples, see our [sample files in the examples directory](/examples/).
 
----
-
-*Note: This tutorial provides a detailed walkthrough for preparing transcripts from scratch. If you already have structured transcripts or are working with a team that handles transcript preparation, you may only need the core documentation on [Transcript Format](transcript-format.html) and [Metadata Setup](metadata.html).*
+Need more help? Check our [transcript format specifications](transcript-format.html) or [contact us](https://github.com/oralhistoryasdata/csv-version/issues).

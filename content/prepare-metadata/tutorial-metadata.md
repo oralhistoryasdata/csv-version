@@ -4,49 +4,56 @@ nav_order: 6
 title: Tutorial - Metadata Preparation
 ---
 
-# Step-by-Step Tutorial: Preparing Collection Metadata
+# Creating Your Collection Metadata
 
-This tutorial will step you through the creation of the metadata for your collection.  
+This concise tutorial guides you through creating the metadata spreadsheet that drives your oral history collection.
 
-## Creating Your Metadata Spreadsheet
+## Quick Start Guide
 
-1. Start with a copy of the sample spreadsheet:
-   - Download the [demo-ohd-metadata.csv](/examples/demo-ohd-metadata.csv) file
-   - Open it in Google Sheets, or another spreadsheet program (*** Do NOT Open IT in EXCEL!)
-   - Check out our [examples folder](/examples/) for complete sample files
+1. **Download the template**: Get the [demo-ohd-metadata.csv](/examples/demo-ohd-metadata.csv) file
+2. **Open in Google Sheets**: Avoid Excel, which can corrupt special characters
+3. **Modify columns as needed**: Keep required fields, add others as desired
+4. **Add one row per interview**: Each interview gets its own metadata entry
+5. **Save as CSV**: Use UTF-8 encoding
 
-2. Review the column structure:
-   - Keep all the required column headers (objectid,title,display_template)
-   - You can add additional columns as needed
-   - You can remove columns that aren't needed
-   
-3. Add your interviews:
-   - Create a new row for each interview
-   - Ensure each interview has a unique objectid
-   - Ensure your transcript's filename matches the `objectid` for the item, and that it is stored in the `_data/transcripts/` folder
-   - Each interview should have the `display_template` of `transcript`
-   
-4. When finished:
-   - Save/export as a CSV file
-   - Do not use EXCEL!!
-   - Name according to your preference (e.g., `john_doe.csv`) but make sure the filename and objectid match!
+## Required Fields
 
+These three fields are **mandatory** for every interview:
 
-## Example Metadata Entry
+| Field | Description | Example |
+|-------|-------------|---------|
+| **objectid** | Unique identifier (used for filename matching) | `smith_john` |
+| **title** | Complete title of interview | `Interview with John Smith on Mining History` |
+| **display_template** | Set to "transcript" for all interviews | `transcript` |
+
+## Important Guidelines
+
+- **Transcript filenames** must match the objectid (e.g., if objectid is "smith_john", the transcript file must be "smith_john.csv")
+- **Place transcripts** in the `_data/transcripts/` folder
+- **Metadata filename** should be set in `_config.yml` (typically "metadata.csv")
+- **Save in CSV format**, not Excel format, to preserve special characters
+
+## Recommended Fields
+
+These additional fields enhance your collection:
+
+| Field | Purpose | Example |
+|-------|---------|---------|
+| **interviewer** | Person conducting interview | `Sarah Johnson` |
+| **interviewee** | Person being interviewed | `John Smith` |
+| **date** | Interview date (ISO format) | `2023-05-15` |
+| **description** | Brief content summary | `Discussion of mining career and safety improvements` |
+| **subject** | Main topics (semicolon separated) | `mining; labor history; workplace safety` |
+| **location** | Interview or subject location | `Coalville, PA` |
+| **object_location** | Link to audio/video (YouTube etc.) | `https://youtu.be/BX_bURONf78` |
+
+## Complete Example
+
+Here's a complete metadata entry:
 
 ```
-objectid: smith_john
-title: Interview with John Smith on Local Mining History
-interviewee: John Smith
-interviewer: Sarah Johnson
-date: 2023-05-15
-description: John Smith discusses his 40-year career in the Coalville mines, focusing on technological changes and safety improvements.
-subject: mining; labor history; workplace safety
-location: Coalville, PA
-latitude: 41.4090
-longitude: -75.6624
-object_location: https://youtu.be/BX_bURONf78
-bio: John Smith (b. 1945) worked as a miner from 1963-2003 and served as safety coordinator for the last decade of his career.
+objectid,title,display_template,interviewer,interviewee,date,description,subject,location,object_location
+smith_john,"Interview with John Smith on Mining History",transcript,"Sarah Johnson","John Smith",2023-05-15,"John Smith discusses his 40-year career in local mines, focusing on safety improvements.","mining; labor history; safety","Coalville, PA",https://youtu.be/BX_bURONf78
 ```
 
-Each interview in your collection will follow this pattern, allowing the system to automatically generate pages for browsing and visualization.
+Once your metadata is ready, save it as "metadata.csv" and upload it to your repository's `_data` folder.

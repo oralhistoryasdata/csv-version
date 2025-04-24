@@ -39,9 +39,9 @@ Interviewee,"School was challenging but rewarding. I particularly enjoyed mathem
 
 The timestamp field accepts several formats:
 
-- **[00:00]** - Minutes:Seconds
-- **[0:00:00]** - Hours:Minutes:Seconds
-- **[00:00.00]** - Minutes:Seconds.Milliseconds
+- **00:00** - Minutes:Seconds
+- **0:00:00** - Hours:Minutes:Seconds
+- **00:00.00** - Minutes:Seconds.Milliseconds
 
 When connecting to audio/video sources, these timestamps create clickable links that allow users to navigate directly to specific points in the recording.
 
@@ -72,4 +72,4 @@ Name your transcript CSV files to match the objectid in your metadata spreadshee
 
 This naming convention is crucial because it connects your transcript files to the CollectionBuilder-CSV metadata system, allowing the platform to automatically link the right transcript with the right metadata entry. This integration between the metadata system and transcript files is one of the key features that makes Oral History as Data powerful and flexible.
 
-{% include docs/button.html text="Check out our Step by Step Tutorial to Learn More" color="outline-primary btn-lg" link="content/prepare/tutorial-transcript.html"%}
+{% include docs/button.html text="Check out our Step by Step Tutorial to Learn More" color="outline-primary btn-lg" link="content/prepare-transcripts/tutorial-transcript.html"%}

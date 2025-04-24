@@ -1,49 +1,48 @@
 ---
 section_id: Publish Your Site
 nav_order: 6
-title: Publishing Your Site
+title: Publishing & Media Integration
 ---
 
-# Publishing and Connecting Media
+# Publishing Your Site & Connecting Media
 
-After preparing your transcripts and metadata, you're ready to publish your content and optionally connect it with audio and video sources. This section walks you through uploading your materials and enhancing them with multimedia elements.
+With your content prepared, it's time to publish your Oral History as Data project and integrate audio or video recordings. This section covers the publishing process and media connection options.
 
 ## What You'll Learn
 
-- How to add content to your GitHub repository
-- How to connect transcripts with audio/video recordings
-- How to ensure everything displays properly on your site
+- How to upload your files to GitHub
+- How to activate GitHub Pages for web publishing
+- How to connect transcripts with media recordings
+- How to verify your site is working correctly
 
 ## The Publishing Workflow
 
-1. **Upload content** - Add your transcripts and metadata to the repository
-2. **Connect media** - Link transcripts to audio/video sources (optional)
-3. **Verify display** - Check that everything appears correctly on your site
+1. **Upload files** - Add transcripts, metadata, and configurations to GitHub
+2. **Configure GitHub Pages** - Activate the free hosting service
+3. **Connect media sources** - Link to audio/video from external platforms
+4. **Test and verify** - Ensure all features work as expected
 
-## Why This Matters
+## Media Integration Options
 
-Publishing is the final step in making your oral histories accessible to the public. By connecting interviews with their original audio or video recordings, you create:
+OHD supports several approaches for connecting transcripts to audio/video:
 
-- A more engaging user experience
-- Multiple ways to interact with your content
-- Greater accessibility for different learning styles
-- A more complete historical record
+1. **External platforms** (recommended)
+   - YouTube or Vimeo for video content
+   - SoundCloud for audio recordings
+   - Internet Archive for public domain content
 
-### CollectionBuilder Connection
+2. **Direct hosting** (for smaller files)
+   - MP3 files in your repository
+   - Local video files (with size limitations)
 
-Oral History as Data is built on the [CollectionBuilder](https://collectionbuilder.github.io/) framework and uses the [CollectionBuilder-CSV metadata format](https://collectionbuilder.github.io/cb-docs/docs/metadata/csv_metadata/). This means:
-
-- Your projects follow digital library metadata standards
-- You can repurpose your metadata for other CollectionBuilder projects
-- Your oral history collection integrates with other digital collection tools
-- You're building on a well-established, open-source platform
+Each method is documented with step-by-step instructions.
 
 ## Documentation & Resources
 
 | Resource | Purpose |
 |----------|---------|
-| [Adding Content to GitHub](github.html) | Learn how to upload your files to your repository |
-| [Connect Audio/Video](av.html) | Link transcripts to media sources |
-| [Example Files](/examples/) | Sample files showing proper formatting |
+| [GitHub Publishing Tutorial](tutorial-publishing.html) | Step-by-step guide to GitHub Pages |
+| [Media Connection Guide](publishing-other.html) | Instructions for linking to audio/video |
+| [Alternative Hosting](publishing.html) | Options beyond GitHub Pages |
 
-{% include docs/bootstrap/button.md color="success btn-lg" text="Start Publishing" link="github.html" %}
+{% include docs/bootstrap/button.md color="success btn-lg" text="Publishing Tutorial" link="tutorial-publishing.html" %}

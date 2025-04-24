@@ -79,4 +79,4 @@ bio: John Smith (b. 1945) worked as a miner from 1963-2003 and served as safety 
 
 Each interview in your collection will follow this pattern, allowing the system to automatically generate pages for browsing and visualization.
 
-{% include docs/button.html text="Check out our Step by Step Tutorial to Learn More" color="outline-primary btn-lg" link="content/prepare/tutorial-metadata.html"%}
+{% include docs/button.html text="Check out our Step by Step Tutorial to Learn More" color="outline-primary btn-lg" link="content/prepare-metadata/tutorial-metadata.html"%}

@@ -1,16 +1,42 @@
 ---
 section_id: Customize Your Site
 nav_order: 6
-title: Section Overview
+title: Customization & Visualization
 ---
-Now that you have your transcript in spreadsheet form (oral history as data!), you can code the various sections of the interview by the topics that you cover. 
 
-This section will walk you through the steps needed to code your transcript with the tags that will create the visualization and browsing possibilities enabled by the Oral History as Data tool. 
+# Customizing Your Site
 
-**Goals**: 
+After preparing your transcripts and metadata, you can enhance your project with customizations and visualization options. This section covers how to code your transcripts for analysis and how to configure the visual aspects of your site.
 
-- Learn how to code your interview by subject 
-- Learn how to copy and paste spreadsheet cells in chunks using the mouse. 
-- Learn the importance of attention to detail when it comes to file naming conventions
+## What You'll Learn
 
-**Estimated Time to Complete**: ~1 Hour (but this depends on the length of the interview)
+- How to create and apply a consistent coding vocabulary to transcripts
+- How to customize the appearance and functionality of your site
+- How to configure the visualization features for transcript analysis
+
+## The Customization Workflow
+
+1. **Set up your coding vocabulary** - Create a controlled vocabulary in filters.csv
+2. **Apply codes to transcripts** - Tag transcript segments with relevant topics
+3. **Configure site appearance** - Adjust colors, layout, and other visual elements
+4. **Test visualization features** - Verify that coded transcripts display properly
+
+## Why This Matters
+
+Proper coding and customization transform your transcripts from simple text into interactive, analyzable data. This approach allows:
+
+- Visual pattern identification across multiple interviews
+- Thematic analysis through interactive filtering
+- Improved user experience through intentional design
+- More engaging presentation of your oral history content
+
+## Documentation & Resources
+
+| Resource | Purpose |
+|----------|---------|
+| [Customization Basics](customization.md) | Learn about site configuration options |
+| [Visualization Settings](visualizations.md) | Configure the visualization interface |
+| [Coding Tutorial](tutorial-coding.md) | Step-by-step guide for coding transcripts |
+| [Example Sites](examples.md) | See customized OHD implementations |
+
+{% include docs/bootstrap/button.md color="success btn-lg" text="Start Customizing" link="customization.md" %}

@@ -4,75 +4,64 @@ nav_order: 4
 title: Tutorial - Publishing via GH Pages
 ---
 
-## Step by Step Instructions - Publishing Your Site Via GitHub Pages
+# Publishing Your OHD Site with GitHub Pages
 
-1. From your repository's homepage, click the "Settings" tab in the top menu bar
+This quick guide shows you how to activate GitHub Pages to make your oral history collection publicly accessible on the web.
+
+## One-Time Setup Process
+
+1. **Access settings**
+   - Go to your repository on GitHub
+   - Click the "Settings" tab in the top menu
    
-   {% include docs/bootstrap/figure.md img="howto/settings_button.png" caption="Settings button" alt="Location of the Settings tab on GitHub" class="w-75" %}
+   {% include docs/bootstrap/figure.md img="howto/settings_button.png" caption="Settings button" alt="Settings tab location on GitHub" class="w-50" %}
 
-2. In the left sidebar, find the "Pages" option under "Code and automation"
+2. **Configure GitHub Pages**
+   - In the left sidebar, click "Pages" under "Code and automation"
+   - Under "Build and Deployment", select "GitHub Actions" from the dropdown 
+   - Click "Configure" on the "GitHub Pages Jekyll" option
+   - Click "Commit Changes" to activate the build workflow
 
+3. **Wait for deployment** (typically 2-5 minutes)
+   - GitHub will build your site automatically
+   - You'll see a deployment notification when complete
+   - Your site will be available at `https://[username].github.io/[repository-name]`
 
-3. In the Build and Deployment section, Select "GitHub Actions" from the dropdown options (change from "Deploy from a branch")
-  - An option for "GitHub Pages Jekyll" will appear. Click "Configure"
-  - A new page will open with a file appear ("jekyll-gh-page.yml")
-  - Click the green "Commit Changes" button at the top right
-  - A modal will appear, and you can then describe the change or just click the green "Commit Changes" on the bottom right
+## Add Site URL to Repository Info
 
-4. Wait a few minutes for your site to build
-   - See below to learn how to add your new url to your GitHub Repo's information while waiting
+Make your site URL easy to find:
 
-5. Access your site at the URL provided
-   
-   {% include docs/bootstrap/alert.md text="Note: It typically takes 1-5 minutes for your site to become available at the provided URL. If you visit too quickly, you'll see a 404 error." color="info" %}
+1. From your repository's main page, locate the "About" section (right sidebar)
+2. Click the gear icon
+3. Paste your site URL in the "Website" field
+4. Click "Save"
 
-## Add the URL to Your GitHub Repository Information
+## Media Integration Tips
 
-While waiting for your site to build, add the URL to your repository description:
+When adding media to your collection:
 
-1. Copy the URL GitHub provided (usually in the format `https://username.github.io/repository-name`)
+### External Media (Recommended)
+- Use YouTube or Vimeo for video content
+- Use SoundCloud for audio recordings
+- Link via the `object_location` field in your metadata
 
-2. Go back to your repository's main page
+### Local Media (Limited)
+- Only for small files under 50MB
+- Store in the objects/ directory
+- GitHub has a 1GB total repository size limit
 
-3. Look for the "About" section on the right sidebar
+## Troubleshooting
 
-4. Click the gear icon next to "About"
-
-5. Paste your URL into the "Website" field
-
-6. Click "Save changes"
-
-This makes it easy to find your site URL in the future and shows visitors where to view your project.
-
-
-## GitHub Pages Usage Guidelines
-
-GitHub Pages is intended for documentation and small project sites. Keep these guidelines in mind:
-
-- Sites should be less than 1GB in total size
-- Monthly bandwidth limit is 100GB
-- Build limits: 10 builds per hour
-
-{% capture media_note %}
-### Hosting Media Files
-
-**Options for audio/video files:**
-
-1. **External Services (Recommended):**
-   - YouTube or Vimeo for video files
-   - SoundCloud for audio files
-   - Other dedicated media hosting platforms
-
-2. **Direct Hosting (Limited):**
-   - Small audio files (MP3) can be stored in your repository
-   - Keep individual files under 50MB when possible
-   - Be mindful of the 1GB total repository size limit
-
-**Note:** For extensive media collections, consider using dedicated media hosting services rather than storing large files directly in your repository.
-{% endcapture %}
-
-{% include docs/bootstrap/alert.md text=media_note color="secondary" %}
+| Issue | Solution |
+|-------|----------|
+| 404 error after publishing | Wait 5-10 minutes for site to propagate |
+| Build failures | Check _config.yml for syntax errors |
+| Missing content | Verify filenames match metadata objectids |
 
 ## Next Steps
 
-Now that your site is published, you're ready to [prepare your content](../prepare/overview.html) for the site.
+1. Share your URL with collaborators and audience
+2. Consider adding [Google Analytics](../setup/configuration.html#analytics) for visitor tracking
+3. Update content by editing files in your repository
+
+{% include docs/bootstrap/alert.md text="GitHub Pages is free but has usage limits: 100GB bandwidth per month and 10 builds per hour." color="info" %}
