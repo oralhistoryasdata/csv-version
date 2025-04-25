@@ -40,7 +40,11 @@ endcapture -%}
 {%- elsif page.object_location contains 'soundcloud' -%}
 {% assign av = "soundcloud" %}
 {% assign soundcloud_id = page.object_location | split: '.com/' | last %}
+{%- elsif page.object_location contains 'archive.org' -%}
+{% assign av = "internetarchive" %}
+{% assign internetarchive_id = page.object_location | split: '/' | last %}
 {%endif%}
+
 <div id="scrolly">
   <article>
     <div class="step my-3 {% unless site.data.theme.media-scroll == false %}
